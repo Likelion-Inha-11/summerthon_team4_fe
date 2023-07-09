@@ -74,7 +74,7 @@ html {
   	right: 0;
   	height: 5px;
   	background: rgba(221,87,137,0.8);
-  	bottom: 100px;
+  	bottom: 65px;
 }
 circle {
   stroke-dashoffset: 0;

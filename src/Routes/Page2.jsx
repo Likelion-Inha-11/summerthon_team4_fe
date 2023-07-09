@@ -1,20 +1,14 @@
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   useRecoilState,
-  useRecoilValueLoadable,
   useSetRecoilState,
+  useRecoilValueLoadable,
 } from "recoil";
-import { testObj, testProcess } from "../atom";
+import { testProcess } from "../atom";
+import { testObj } from "../atom";
 
 const Wrapper = styled(motion.div)`
   width: 375px;
@@ -58,8 +52,8 @@ const Dragdiv = styled.div`
   margin-top: 20px;
 `;
 const DragZone = styled(motion.div)`
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 100px;
   border-radius: 47%;
   display: flex;
   justify-content: center;
@@ -67,11 +61,11 @@ const DragZone = styled(motion.div)`
 `;
 const ScoreGrid = styled(motion.div)`
   display: grid;
-  width: 80%;
+  width: 70%;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 15px;
-  column-gap: 15px;
-  margin-top: 10px;
+  row-gap: 20px;
+  column-gap: 20px;
+  margin-top: 20px;
 `;
 const ScoreBox = styled(motion.div)`
   background-color: transparent;
@@ -79,10 +73,6 @@ const ScoreBox = styled(motion.div)`
   /* box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1); */
   place-self: center;
   border: none;
-`;
-const Svg = styled(motion.svg)`
-  border: none;
-  width: 120px;
 `;
 const AskContent = styled.p`
   margin-top: 10px;
@@ -93,7 +83,6 @@ const AskContent = styled.p`
   color: rgba(0, 0, 0);
   font-weight: 400;
   position: relative;
-  z-index: 1;
 `;
 const HeaderDiv = styled.div`
   display: flex;
@@ -103,7 +92,7 @@ const HeaderDiv = styled.div`
   padding: 30px 30px 0px 30px;
   height: 100px;
   position: fixed;
-  z-index: 10;
+  z-index: 1;
   border-bottom: 1.5px solid rgba(221, 87, 137, 0.8);
   background-color: rgba(255, 255, 255, 1);
   div i,
@@ -132,10 +121,7 @@ const Footer = styled.div`
 `;
 const ScoreBoxVariants = {
   hover: { rotateZ: 180, transition: { duration: 0.3 } },
-  tap: {
-    rotateZ: -180,
-    transition: { duration: 0.3 },
-  },
+  tap: { rotateZ: -180, transition: { duration: 0.3 } },
   initial: {
     opacity: 0,
   },
@@ -157,18 +143,34 @@ const DragZoneVariants = {
     },
   },
 };
+const WrapperVariants = {
+  load: { opacity: 0, x: 500 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  exit: { opacity: 0, x: -500 },
+};
+const Svg = styled(motion.svg)`
+  border: none;
+  width: 120px;
+`;
 
-function Page1({ id }) {
+function Page2() {
+  const { state } = useLocation();
+  const { id } = state;
+  const { process } = state;
+
+  console.log(id);
+
   const ref = useRef(null);
   const navigate = useNavigate();
 
   const { scrollYProgress: progressY } = useScroll();
+  const { scrollYProgress: scrollMandatory } = useScroll({ target: ref });
 
   const [isDropped, setIsDropped] = useState([]);
   useEffect(() => {
     setIsDropped([
       {
-        id: 1,
+        id: 4,
         checked: false,
         scorenum: [
           {
@@ -190,7 +192,7 @@ function Page1({ id }) {
         ],
       },
       {
-        id: 2,
+        id: 5,
         checked: false,
         scorenum: [
           {
@@ -212,7 +214,7 @@ function Page1({ id }) {
         ],
       },
       {
-        id: 3,
+        id: 6,
         checked: false,
         scorenum: [
           {
@@ -235,6 +237,10 @@ function Page1({ id }) {
       },
     ]);
   }, []);
+
+  const setProcess = useSetRecoilState(testProcess);
+  //   const process = useRecoilValueLoadable(testProcess);
+
   const [quest, setQuest] = useRecoilState(testObj);
   const getObjectById = (id) => {
     return quest.find((item) => item.testid === parseInt(id)) || {};
@@ -247,8 +253,13 @@ function Page1({ id }) {
     damping: 30,
     restDelta: 0.001,
   });
-  const setProcess = useSetRecoilState(testProcess);
-  const process = useRecoilValueLoadable(testProcess);
+  const nextPage = () => {
+    navigate("/page3", {
+      state: {
+        id: id,
+      },
+    });
+  };
 
   const DragandDrop = (x, y, itemid, num) => {
     if (x >= 530 && x <= 630) {
@@ -273,20 +284,20 @@ function Page1({ id }) {
         })
       );
     }
-    if (itemid === 3) {
+    if (itemid === 6) {
       nextPage();
     }
   };
-  const nextPage = () => {
-    navigate("/page2", {
-      state: {
-        id: id,
-      },
-    });
-  };
 
   return (
-    <Wrapper id={id}>
+    <Wrapper
+      variants={WrapperVariants}
+      initial="load"
+      animate="show"
+      exit="exit"
+      id={id}
+      ref={ref}
+    >
       <HeaderDiv>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p
@@ -306,15 +317,14 @@ function Page1({ id }) {
             r="30"
             pathLength="1"
             id="indicator"
-            style={{ pathLength: progressY }}
+            style={{ pathLength: process }}
           />
         </svg>
       </HeaderDiv>
-      {questions.slice(0, 3).map((item) => (
+      {questions.slice(3, 6).map((item) => (
         <Container
-          ref={ref}
           style={{
-            paddingBottom: item.id === 3 ? "180px" : 0,
+            paddingBottom: item.id === 6 ? "180px" : 0,
           }}
         >
           <AskDiv id={id} layoutId={item.id === 1 ? id + "" : null}>
@@ -340,11 +350,11 @@ function Page1({ id }) {
           <ScoreGrid>
             <ScoreBox
               onPanEnd={(e, info) => {
-                console.log(isDropped[item.id - 1]);
+                console.log(isDropped[item.id - 4]);
                 DragandDrop(info.point.x, info.point.y, item.id, 1);
               }}
               style={{
-                visibility: isDropped[item.id - 1]?.scorenum[0]?.dropped
+                visibility: isDropped[item.id - 4]?.scorenum[0]?.dropped
                   ? "hidden"
                   : "block",
               }}
@@ -483,11 +493,11 @@ z"
             </ScoreBox>
             <ScoreBox
               onPanEnd={(e, info) => {
-                console.log(isDropped[item.id - 1]);
+                console.log(isDropped[item.id - 4]);
                 DragandDrop(info.point.x, info.point.y, item.id, 2);
               }}
               style={{
-                visibility: isDropped[item.id - 1]?.scorenum[1]?.dropped
+                visibility: isDropped[item.id - 4]?.scorenum[1]?.dropped
                   ? "hidden"
                   : "block",
               }}
@@ -706,11 +716,11 @@ z"
             </ScoreBox>
             <ScoreBox
               onPanEnd={(e, info) => {
-                console.log(isDropped[item.id - 1]);
+                console.log(isDropped[item.id - 4]);
                 DragandDrop(info.point.x, info.point.y, item.id, 3);
               }}
               style={{
-                visibility: isDropped[item.id - 1]?.scorenum[2]?.dropped
+                visibility: isDropped[item.id - 4]?.scorenum[2]?.dropped
                   ? "hidden"
                   : "block",
               }}
@@ -935,11 +945,14 @@ z"
             </ScoreBox>
             <ScoreBox
               onPanEnd={(e, info) => {
-                console.log(isDropped[item.id - 1]);
+                console.log(isDropped[item.id - 4]);
                 DragandDrop(info.point.x, info.point.y, item.id, 4);
+                if (item.id === 6) {
+                  nextPage();
+                }
               }}
               style={{
-                visibility: isDropped[item.id - 1]?.scorenum[3]?.dropped
+                visibility: isDropped[item.id - 4]?.scorenum[3]?.dropped
                   ? "hidden"
                   : "block",
               }}
@@ -1167,15 +1180,7 @@ z"
       <Footer>
         <button
           style={{ position: "absolute" }}
-          onClick={() => {
-            navigate("/page2", {
-              state: {
-                id: id,
-                process: 0.33,
-              },
-            });
-            setProcess(0.33);
-          }}
+          onClick={() => navigate("/page3", { state: { id: id } })}
         >
           다음
         </button>
@@ -1183,4 +1188,4 @@ z"
     </Wrapper>
   );
 }
-export default Page1;
+export default Page2;

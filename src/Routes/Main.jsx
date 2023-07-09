@@ -86,16 +86,19 @@ const TestGridVariants = {
 };
 const ItemVariants = {
   start: {
-    y: -20,
+    y: 20,
     opacity: 0,
   },
   end: {
-    y: 0,
+    x: 0,
     opacity: 1,
+    transition: {
+      delay: 0.2,
+      duration: 0.2,
+    },
   },
   hover: { scale: 1.08, zIndex: 1 },
 };
-
 const Overlay = styled(motion.div)`
   height: 100%;
   width: 100vw;
@@ -137,12 +140,9 @@ function Main() {
             setTestId(1);
           }}
           variants={ItemVariants}
+          initial="start"
+          animate="end"
           whileHover="hover"
-          transition={{
-            default: {
-              delay: 0.3,
-            },
-          }}
           bgcolor={
             "linear-gradient(135deg, rgba(255,203,160), rgba(221,87,137), rgba(155,91,230));"
           }
@@ -160,12 +160,9 @@ function Main() {
             setTestId(2);
           }}
           variants={ItemVariants}
+          initial="start"
+          animate="end"
           whileHover="hover"
-          transition={{
-            default: {
-              delay: 0.6,
-            },
-          }}
           bgcolor={
             "linear-gradient(135deg, rgba(255,95,109), rgba(255,195,113));"
           }
@@ -183,12 +180,9 @@ function Main() {
             setTestId(3);
           }}
           variants={ItemVariants}
+          initial="start"
+          animate="end"
           whileHover="hover"
-          transition={{
-            default: {
-              delay: 0.9,
-            },
-          }}
           bgcolor={
             "linear-gradient(135deg, rgba(161, 255, 139), rgba(63, 147, 255));"
           }
@@ -206,12 +200,9 @@ function Main() {
             setTestId(4);
           }}
           variants={ItemVariants}
+          initial="start"
+          animate="end"
           whileHover="hover"
-          transition={{
-            default: {
-              delay: 1.2,
-            },
-          }}
           bgcolor={
             "linear-gradient(135deg, rgba(213, 218, 240), rgba(121, 160, 231), rgba(41, 110, 223));"
           }

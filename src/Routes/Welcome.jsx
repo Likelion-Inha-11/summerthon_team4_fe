@@ -24,7 +24,7 @@ const Svg = styled.svg`
   height: 330px;
   path {
     stroke: gold;
-    stroke-width: 3;
+    stroke-width: 4;
   }
 `;
 const svg = {
