@@ -52,8 +52,8 @@ const Dragdiv = styled.div`
   margin-top: 20px;
 `;
 const DragZone = styled(motion.div)`
-  width: 120px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 47%;
   display: flex;
   justify-content: center;
@@ -319,7 +319,11 @@ function Page3() {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p
             onClick={() => {
-              window.location.reload();
+              navigate("/page2", {
+                state: {
+                  id: id,
+                },
+              });
             }}
           >
             <i style={{ marginRight: 10 }} class="fa-solid fa-arrow-left"></i>
@@ -353,10 +357,10 @@ function Page3() {
               initial="initial"
               animate="end"
               style={{
-                background: isDropped[item.id - 1]?.checked
+                background: isDropped[item.id - 7]?.checked
                   ? "linear-gradient(135deg, rgba(255, 203, 160, 0.8), rgba(221, 87, 137, 0.8), rgba(155, 91, 230, 0.8))"
                   : "rgba(255,255,255,1)",
-                border: isDropped[item.id - 1]?.checked
+                border: isDropped[item.id - 7]?.checked
                   ? "none"
                   : "4px dotted rgba(221, 87, 137, 0.8)",
               }}

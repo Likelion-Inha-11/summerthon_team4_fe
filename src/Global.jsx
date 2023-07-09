@@ -54,7 +54,7 @@ html {
 }
 ::-webkit-scrollbar{
 	height: 0px;
-	width: 10px;
+	width: 0px;
 	background: rgba(255, 255, 255, 1);
 }
 ::-webkit-scrollbar-thumb {
