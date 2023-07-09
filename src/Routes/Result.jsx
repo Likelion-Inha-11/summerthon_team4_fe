@@ -1,6 +1,7 @@
 import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
+import ApexCharts from "apexcharts";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;

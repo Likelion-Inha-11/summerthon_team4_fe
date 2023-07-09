@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Page1 from "./Page1";
+import { testId } from "../atom";
+import { useSetRecoilState } from "recoil";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -8,12 +13,11 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   background: url("img/WelcomeBack.png");
-  padding-top: 70px;
 `;
 const TestList = styled(motion.p)`
   font-size: 40px;
   color: black;
-  padding-top: 40px;
+  padding-top: 100px;
   font-family: "Seymour One", sans-serif;
 `;
 const TestGrid = styled(motion.div)`
@@ -92,14 +96,46 @@ const ItemVariants = {
   hover: { scale: 1.08, zIndex: 1 },
 };
 
+const Overlay = styled(motion.div)`
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1);
+`;
+const OverlayVariants = {
+  initial: { opacity: 0 },
+  end: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+const WrapperVariants = {
+  load: { opacity: 0, x: 500 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  exit: { opacity: 0, x: -500 },
+};
+
 function Main() {
+  const navigate = useNavigate();
+  const [id, setId] = useState(null);
+  const setTestId = useSetRecoilState(testId);
+
   return (
-    <Wrapper>
+    <Wrapper variants={WrapperVariants} initial="load" animate="show">
       <TestList variants={TestListVariants} initial="start" animate="end">
         Test List
       </TestList>
       <TestGrid variants={TestGridVariants} initial="start" animate="end">
         <ItemBox
+          layoutId={1 + ""}
+          onClick={() => {
+            setId(1 + "");
+            setTestId(1);
+          }}
           variants={ItemVariants}
           whileHover="hover"
           transition={{
@@ -118,6 +154,11 @@ function Main() {
           </Cf>
         </ItemBox>
         <ItemBox
+          layoutId={2 + ""}
+          onClick={() => {
+            setId(2 + "");
+            setTestId(2);
+          }}
           variants={ItemVariants}
           whileHover="hover"
           transition={{
@@ -136,6 +177,11 @@ function Main() {
           </Cf>
         </ItemBox>
         <ItemBox
+          layoutId={3 + ""}
+          onClick={() => {
+            setId(3 + "");
+            setTestId(3);
+          }}
           variants={ItemVariants}
           whileHover="hover"
           transition={{
@@ -154,6 +200,11 @@ function Main() {
           </Cf>
         </ItemBox>
         <ItemBox
+          layoutId={4 + ""}
+          onClick={() => {
+            setId(4 + "");
+            setTestId(4);
+          }}
           variants={ItemVariants}
           whileHover="hover"
           transition={{
@@ -172,6 +223,18 @@ function Main() {
           </Cf>
         </ItemBox>
       </TestGrid>
+      <AnimatePresence>
+        {id ? (
+          <Overlay
+            id={id}
+            variants={OverlayVariants}
+            initial="initial"
+            animate="end"
+          >
+            <Page1 variants={OverlayVariants} id={id}></Page1>
+          </Overlay>
+        ) : null}
+      </AnimatePresence>
     </Wrapper>
   );
 }
