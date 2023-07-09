@@ -358,10 +358,10 @@ function Page3() {
               animate="end"
               style={{
                 background: isDropped[item.id - 7]?.checked
-                  ? "linear-gradient(135deg, rgba(255, 203, 160, 0.8), rgba(221, 87, 137, 0.8), rgba(155, 91, 230, 0.8))"
+                  ? "url('img/sim2.png')"
                   : "rgba(255,255,255,1)",
                 border: isDropped[item.id - 7]?.checked
-                  ? "none"
+                  ? "rgba(255, 201, 0)"
                   : "4px dotted rgba(221, 87, 137, 0.8)",
               }}
             >
@@ -540,7 +540,7 @@ z"
                 viewBox="0 0 1016 1000"
               >
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="
@@ -609,7 +609,7 @@ M139.104141,415.801422
 z"
                 />
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="
@@ -763,7 +763,7 @@ z"
                 viewBox="0 0 1016 1000"
               >
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="
@@ -839,7 +839,7 @@ M332.552734,894.033752
 z"
                 />
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="
@@ -995,7 +995,7 @@ z"
                 viewBox="0 0 1065 1000"
               >
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="
@@ -1067,7 +1067,7 @@ M906.725403,365.939850
 z"
                 />
                 <path
-                  fill="#FFFFFE"
+                  fill="none"
                   opacity="1.000000"
                   stroke="none"
                   d="

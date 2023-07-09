@@ -112,8 +112,8 @@ const Map = styled(motion.div)`
     font-weight: 600;
     font-size: 14px;
     margin-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 13px;
+    margin-bottom: 7px;
   }
 `;
 const MapContainer = styled(motion.div)`
@@ -200,18 +200,22 @@ function ShowResult() {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    setData([2.5, 5, 5, 10, 7.5, 10, 7.5, 10, 2.5, 7.5]);
-  });
+  const handleMap = () => {
+    const map = document.getElementById("map");
+    map.style.height = "700px";
+    map.style.zIndex = "90";
+  };
 
   useEffect(() => {
-    const container = document.querySelector(".map");
+    const container = document.getElementById("map");
+
     const options = {
       center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
       level: 3,
     };
 
     const map = new window.kakao.maps.Map(container, options);
+
     const mapTypeControl = new window.kakao.maps.MapTypeControl();
     const zoomControl = new window.kakao.maps.ZoomControl();
 
@@ -294,28 +298,32 @@ function ShowResult() {
           }}
         ></ApexChart>
       </Chart>
-      <AnimatePresence>
-        <MidDiv variants={BoxVariants} initial="initial" animate="end">
-          <Detail layoutId={1 + ""} onClick={() => setId(1)}>
-            <p>자세히보기</p>
-          </Detail>
-          <ShareDiv layoutId={2 + ""} onClick={() => setId(2)}>
-            <p>공유하기</p>
-          </ShareDiv>
-          <OtherTest layoutId={3 + ""} onClick={() => setId(3)}>
-            <p>다른 검사</p>
-          </OtherTest>
-        </MidDiv>
-        <Map layoutId={4 + ""} onClick={() => setId(4)}>
-          <p>인근 병원</p>
-          <MapContainer>
-            <div
-              className="map"
-              style={{ width: "300px", height: "200px", borderRadius: "20px" }}
-            ></div>
-          </MapContainer>
-        </Map>
-      </AnimatePresence>
+      <MidDiv variants={BoxVariants} initial="initial" animate="end">
+        <Detail
+          layoutId={1 + ""}
+          onClick={() => {
+            setId(1);
+            setData([2.5, 5, 5, 10, 7.5, 10, 7.5, 10, 2.5, 7.5]);
+          }}
+        >
+          <p>자세히보기</p>
+        </Detail>
+        <ShareDiv layoutId={2 + ""} onClick={() => setId(2)}>
+          <p>공유하기</p>
+        </ShareDiv>
+        <OtherTest layoutId={3 + ""} onClick={() => setId(3)}>
+          <p>다른 검사</p>
+        </OtherTest>
+      </MidDiv>
+      <Map layoutId={4 + ""} onClick={() => setId(4)}>
+        <p>인근 병원</p>
+        <MapContainer>
+          <div
+            id="map"
+            style={{ width: "300px", height: "200px", borderRadius: "20px" }}
+          ></div>
+        </MapContainer>
+      </Map>
       <AnimatePresence>
         {id ? (
           <Overlay
@@ -430,15 +438,7 @@ function ShowResult() {
                 variants={OverlayVariants}
                 layoutId={id + ""}
               >
-                <div
-                  className="map"
-                  style={{
-                    width: "400px",
-                    height: "600px",
-                    position: "absolute",
-                    borderRadius: "20px",
-                  }}
-                ></div>
+                {() => handleMap()}
               </Box>
             ) : null}
           </Overlay>
