@@ -16,7 +16,6 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: url("img/WelcomeBack.png");
   padding-top: 70px;
 `;
 const Svg = styled.svg`
@@ -85,7 +84,15 @@ const BottomWrap = styled.div`
   width: 70%;
   margin-bottom: 140px;
 `;
-
+const Video = styled.video`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+`;
 function Welcome() {
   const navigate = useNavigate();
   const biggerboxref = useRef < HTMLDivElement > null;
@@ -106,6 +113,9 @@ function Welcome() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
     <Wrapper style={{}}>
+      <Video autoPlay loop muted>
+        <source src="bubble.mp4" type="video/mp4" />
+      </Video>
       <Svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

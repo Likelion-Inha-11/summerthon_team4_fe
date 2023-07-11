@@ -1381,14 +1381,14 @@ z"
       ))}
       <motion.div id="progressY" style={{ scaleX }}></motion.div>
       <Footer>
-        <button
-          style={{ position: "absolute" }}
-          onClick={() => {
-            nextPage();
-          }}
-        >
-          다음
-        </button>
+        <img
+        style={{ position: "absolute"}}
+        src="img/다음 심금 깜장.png"
+        height="30rem"
+        onClick={() => {
+          nextPage();
+        }}
+        />
       </Footer>
     </Wrapper>
   );
