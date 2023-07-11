@@ -278,48 +278,48 @@ export const testResult = atom({
   default: [
     {
       idx: 1,
-      score: 0,
+      score: 5,
     },
     {
       idx: 2,
-      score: 0,
+      score: 5,
     },
     {
       idx: 3,
-      score: 0,
+      score: 5,
     },
     {
       idx: 4,
-      score: 0,
+      score: 5,
     },
     {
       idx: 5,
-      score: 0,
+      score: 5,
     },
     {
       idx: 6,
-      score: 0,
+      score: 5,
     },
     {
       idx: 7,
-      score: 0,
+      score: 5,
     },
     {
       idx: 8,
-      score: 0,
+      score: 5,
     },
     {
       idx: 9,
-      score: 0,
+      score: 5,
     },
     {
       idx: 10,
-      score: 0,
+      score: 5,
     },
   ],
 });
 
 export const testName = atom({
   key: "testName",
-  default: 3,
+  default: 2,
 });

@@ -61,7 +61,7 @@ const BoxVariants = {
 };
 const BackBtn = styled.button`
   border: none;
-  margin-top: 30px;
+  margin-top: 14px;
   background-color: transparent;
   font-size: 20px;
   &:hover {
@@ -160,7 +160,7 @@ function KakaoMap() {
           </SearchForm>
           <div
             id="map"
-            style={{ width: 300, height: 300, borderRadius: 20 }}
+            style={{ width: 300, height: 330, borderRadius: 20 }}
           ></div>
           <BackBtn onClick={() => navigate("/result")}>Back</BackBtn>
         </Box>

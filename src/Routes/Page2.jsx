@@ -167,6 +167,25 @@ const Svg = styled(motion.svg)`
 // };
 
 function Page2() {
+  const [btnView, setBtnView] = useState(false);
+  const scrollRef = useRef(0);
+
+  const handleScroll = () => {
+    if (window.scrollY > scrollRef.current) {
+      setBtnView(true);
+    } else {
+      setBtnView(false);
+    }
+    scrollRef.current = window.scrollY;
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const { state } = useLocation();
   const { id } = state;
   const { score1 } = state;
@@ -253,6 +272,13 @@ function Page2() {
         ],
       },
     ]);
+    const timer = setInterval(() => {
+      window.addEventListener("scroll", handleScroll);
+    }, 100);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const [quest, setQuest] = useRecoilState(testObj);
@@ -270,6 +296,8 @@ function Page2() {
     restDelta: 0.001,
   });
   const nextPage = () => {
+    scrollToTop();
+
     navigate("/page3", {
       state: {
         id: id,

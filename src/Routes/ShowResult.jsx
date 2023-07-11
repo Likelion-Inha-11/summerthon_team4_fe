@@ -24,11 +24,12 @@ const Title = styled.p`
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   font-size: 24px;
-  padding-top: 40px;
+  padding: 30px;
 `;
 const Chart = styled(motion.div)`
   width: 100%;
-  max-height: 33vh;
+  max-height: 30vh;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,12 +155,19 @@ const Box = styled(motion.div)`
   bottom: 700px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
 `;
-const Img = styled.img``;
+const Img = styled.img`
+  width: 50%;
+  height: 120px;
+`;
 const ResultDetail = styled.div``;
 const ResultText = styled.p`
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   font-size: 15px;
+  margin-top: 15px;
+  width: 100%;
+  height: 30px;
+  text-align: center;
 `;
 const BoxVariants = {
   initial: { y: 20, opacity: 0 },
@@ -196,11 +204,34 @@ const GoTestBtn = styled.button`
 `;
 const Status = styled.div`
   background: url("img/sim${(props) => props.status}.png");
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 50px;
+  background-color: transparent;
   margin-bottom: 10px;
 `;
-const StatusDetail = styled.p``;
+const StatusTitle = styled.p`
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+`;
+const StatusDetail = styled.p`
+  padding: 0px 23px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  font-family: "Noto Sans KR", sans-serif;
+`;
+const DetailBox = styled(motion.div)`
+  background-color: rgba(255, 255, 255, 1);
+  overflow: scroll;
+  border-radius: 30px;
+  width: 330px;
+  height: 430px;
+  box-sizing: border-box;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function ShowResult() {
   const [id, setId] = useState(null);
@@ -210,6 +241,7 @@ function ShowResult() {
 
   const testId = useRecoilValue(testName); // STRING
   const [result, setResult] = useRecoilState(testResult);
+  const [detailimg, setDetailimg] = useState("");
 
   // 각 Test의 총합 점수 => 양호, 주의, 의심, 위험 판단
   // 각 Content의 점수합 필요
@@ -226,7 +258,6 @@ function ShowResult() {
     handleDetail();
     console.log(result);
   }, []);
-
   const handleDetail = async () => {
     let f = 0;
     let ff = 0;
@@ -249,7 +280,6 @@ function ShowResult() {
     setDetailresult([f, ff, fff, ffff, fffff]);
     console.log(detailresult);
   };
-
   const handleAll = () => {
     let sum = 0;
     result?.map((item) => (sum += item?.score));
@@ -291,6 +321,7 @@ function ShowResult() {
 
     if (sum < 40) {
       setStatus("양호");
+      setDetailimg("img/sim1.png");
       if (testId === 1) {
         setDetailstatus(
           "당신은 매사 침착함을 유지하며 일상생활을 꾸려 나갈 수 있는 사람이군요! 차분하게 주어진 일을 해결할 줄도 알고, 자기 일에 집중할 수 있는 사람입니다. 건강한 성격으로 하루하루 활기차게 보내시길 바랍니다. "
@@ -310,6 +341,7 @@ function ShowResult() {
       }
     } else if (sum < 60) {
       setStatus("주의");
+      setDetailimg("img/sim2.png");
       if (testId === 1) {
         setDetailstatus(
           "평소에 자신이 조금 산만한 사람인 것 같다고 느끼는 순간이 있지 않나요? 집중하고 싶은 일에 쉽게 몰입하지 못해서 속상한 적이 있을 것 같아요. 업무의 완성도가 떨어지거나 지나치게 말이 많아진 적은 없는지 자기의 행동을 돌아보는 건 어떨까요!"
@@ -329,6 +361,7 @@ function ShowResult() {
       }
     } else if (sum < 80) {
       setStatus("의심");
+      setDetailimg("img/sim3.png");
       if (testId === 1) {
         setDetailstatus(
           "당신은 해야 할 일은 많은데 쉽게 집중하지 못하고, 산만한 성격으로 일의 완성도가 현저히 떨어질 때가 종종 있는 것 같아요. 성인 ADHA가 의심스럽다는 사실이 처음에는 조금 불안하고, 혼란스러울 수 있습니다. 하지만 이는 당신의 성장과 변화를 위한 기회라고 생각하면 좋을 것 같아요!"
@@ -348,6 +381,7 @@ function ShowResult() {
       }
     } else if (sum < 100) {
       setStatus("위험");
+      setDetailimg("img/sim4.png");
       if (testId === 1) {
         setDetailstatus(
           "업무의 완성도나 일상생활에서의 집중력이 부족해서 속상한 적이 많았을 거예요. 성인 ADHD 검사 결과가 위험으로 판단된다면 그것은 당신에게 큰 부담일 수 있습니다. 하지만, 이 결과가 당신의 모든 것을 판단하는 것은 아니기에 용기를 내서 자기 행복과 안정을 위해 치료의 과정을 밟는 것은 어떨까요? "
@@ -369,7 +403,6 @@ function ShowResult() {
 
     console.log(result);
   };
-
   function WhatStatus() {
     if (status === "양호") {
       return 1;
@@ -402,7 +435,7 @@ function ShowResult() {
           options={{
             chart: {
               height: 600,
-              width: 600,
+              width: "100%",
               background: "transparent",
               toolbar: {
                 show: false,
@@ -441,7 +474,7 @@ function ShowResult() {
               labels: {
                 show: true,
                 style: {
-                  fontSize: "9px",
+                  fontSize: "8px",
                   fontWeight: 600,
                 },
               },
@@ -486,20 +519,9 @@ function ShowResult() {
             exit="exit"
           >
             {id === 1 ? (
-              <Box
-                style={{
-                  width: 330,
-                  height: 500,
-                  zIndex: 90,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-                variants={OverlayVariants}
-                layoutId={id + ""}
-              >
+              <DetailBox variants={OverlayVariants} layoutId={id + ""}>
                 <ResultText>채점 결과 총합 {totalscore}점 입니다.</ResultText>
-                <div style={{ height: 400, width: 340 }}>
+                <div style={{ height: 340, width: 340 }}>
                   <ApexChart
                     type="line"
                     series={[
@@ -555,13 +577,12 @@ function ShowResult() {
                       },
                     }}
                   ></ApexChart>
-                  <Status status={WhatStatus()}></Status>
-                  <p>만족</p>
-                  <StatusDetail>{detailstatus}</StatusDetail>
                 </div>
-                <Img></Img>
+                <Img src={detailimg}></Img>
+                <StatusTitle>만족</StatusTitle>
+                <StatusDetail>{detailstatus}</StatusDetail>
                 <ResultDetail></ResultDetail>
-              </Box>
+              </DetailBox>
             ) : null}
             {id === 2 ? (
               <Box variants={OverlayVariants} layoutId={id + ""}></Box>

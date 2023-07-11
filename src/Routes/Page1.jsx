@@ -159,10 +159,31 @@ const DragZoneVariants = {
 };
 
 function Page1({ id }) {
+  const [btnView, setBtnView] = useState(false);
+  const scrollRef = useRef(0);
+
+  const handleScroll = () => {
+    if (window.scrollY > scrollRef.current) {
+      setBtnView(true);
+    } else {
+      setBtnView(false);
+    }
+    scrollRef.current = window.scrollY;
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const ref = useRef(null);
   const navigate = useNavigate();
 
   const { scrollYProgress: progressY } = useScroll();
+  const { scrollY } = useScroll({ target: ref });
+  console.log(scrollY);
 
   const [isDropped, setIsDropped] = useState([]);
   const setTest = useSetRecoilState(testName);
@@ -236,6 +257,13 @@ function Page1({ id }) {
       },
       setTest(parseInt(id)),
     ]);
+    const timer = setInterval(() => {
+      window.addEventListener("scroll", handleScroll);
+    }, 100);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const [quest, setQuest] = useRecoilState(testObj);
@@ -288,6 +316,8 @@ function Page1({ id }) {
     }
   };
   const nextPage = () => {
+    scrollToTop();
+
     navigate("/page2", {
       state: {
         id: id,
@@ -297,6 +327,7 @@ function Page1({ id }) {
       },
     });
   };
+
   // const setScoreForIndex = (index, score) => {
   //   setScores((prevScores) => {
   //     const existingScoreIndex = prevScores.findIndex(
@@ -313,7 +344,7 @@ function Page1({ id }) {
   // };
 
   return (
-    <Wrapper id={id}>
+    <Wrapper id={id} ref={ref}>
       <HeaderDiv>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p
@@ -339,7 +370,6 @@ function Page1({ id }) {
       </HeaderDiv>
       {questions.slice(0, 3).map((item) => (
         <Container
-          ref={ref}
           style={{
             paddingBottom: item.id === 3 ? "180px" : 0,
           }}
@@ -368,6 +398,7 @@ function Page1({ id }) {
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(item.id);
+                console.log(info.point.x, info.point.y);
                 DragandDrop(info.point.x, info.point.y, item.id, 1, 2.5);
               }}
               style={{
