@@ -157,7 +157,7 @@ const Box = styled(motion.div)`
 `;
 const Img = styled.img`
   width: 50%;
-  height: 120px;
+  height: 140px;
 `;
 const ResultDetail = styled.div``;
 const ResultText = styled.p`
@@ -225,7 +225,7 @@ const DetailBox = styled(motion.div)`
   overflow: scroll;
   border-radius: 30px;
   width: 330px;
-  height: 430px;
+  max-height: 60vh;
   box-sizing: border-box;
   z-index: 90;
   display: flex;

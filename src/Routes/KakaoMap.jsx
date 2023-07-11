@@ -14,8 +14,8 @@ const Wrapper = styled(motion.div)`
   background-color: #faf9fe;
 `;
 const Box = styled(motion.div)`
-  width: 330px;
-  height: 60vh;
+  width: 90%;
+  max-height: 60vh;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
@@ -61,7 +61,7 @@ const BoxVariants = {
 };
 const BackBtn = styled.button`
   border: none;
-  margin-top: 14px;
+  padding: 10px;
   background-color: transparent;
   font-size: 20px;
   &:hover {
@@ -160,7 +160,7 @@ function KakaoMap() {
           </SearchForm>
           <div
             id="map"
-            style={{ width: 300, height: 330, borderRadius: 20 }}
+            style={{ width: "90%", height: 330, borderRadius: 20 }}
           ></div>
           <BackBtn onClick={() => navigate("/result")}>Back</BackBtn>
         </Box>
