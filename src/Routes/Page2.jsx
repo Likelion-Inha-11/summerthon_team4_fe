@@ -7,8 +7,7 @@ import {
   useSetRecoilState,
   useRecoilValueLoadable,
 } from "recoil";
-import { testProcess } from "../atom";
-import { testObj } from "../atom";
+import { testObj, testResult } from "../atom";
 
 const Wrapper = styled(motion.div)`
   width: 375px;
@@ -152,13 +151,31 @@ const Svg = styled(motion.svg)`
   border: none;
   width: 120px;
 `;
+// const circle = {
+//   start: {
+//     pathLength: 0,
+//     stroke: "rgba(221, 87, 137, 0.8)",
+//   },
+//   end: {
+//     pathLength: [0, 0.33],
+
+//     stroke: "rgba(221, 87, 137, 0.8)",
+//     transition: {
+//       duration: 0.3,
+//     },
+//   },
+// };
 
 function Page2() {
   const { state } = useLocation();
   const { id } = state;
-  const { process } = state;
+  const { score1 } = state;
+  const { score2 } = state;
+  const { score3 } = state;
 
-  console.log(id);
+  const [score4, setScore4] = useState(0);
+  const [score5, setScore5] = useState(0);
+  const [score6, setScore6] = useState(0);
 
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -238,10 +255,9 @@ function Page2() {
     ]);
   }, []);
 
-  const setProcess = useSetRecoilState(testProcess);
-  //   const process = useRecoilValueLoadable(testProcess);
-
   const [quest, setQuest] = useRecoilState(testObj);
+  const setResult = useSetRecoilState(testResult);
+
   const getObjectById = (id) => {
     return quest.find((item) => item.testid === parseInt(id)) || {};
   };
@@ -257,11 +273,45 @@ function Page2() {
     navigate("/page3", {
       state: {
         id: id,
+        score4,
+        score5,
+        score6,
       },
     });
   };
+  const handleScore = async () => {
+    await setResult((obj) =>
+      obj?.map((item) => {
+        if (item?.idx === 1) {
+          return {
+            ...item,
+            score: score1,
+          };
+        } else if (item?.idx === 2) {
+          return {
+            ...item,
+            score: score2,
+          };
+        } else if (item?.idx === 3) {
+          return {
+            ...item,
+            score: score3,
+          };
+        }
+        return item;
+      })
+    );
+  };
 
-  const DragandDrop = (x, y, itemid, num) => {
+  const DragandDrop = (x, y, itemid, num, score) => {
+    if (itemid === 4) {
+      setScore4(score);
+    } else if (itemid === 5) {
+      setScore5(score);
+    } else if (itemid === 6) {
+      setScore6(score);
+    }
+
     if (x >= 530 && x <= 630) {
       setIsDropped((prevState) =>
         prevState.map((obj) => {
@@ -283,9 +333,9 @@ function Page2() {
           return obj;
         })
       );
-    }
-    if (itemid === 6) {
-      nextPage();
+      if (itemid === 6) {
+        handleScore();
+      }
     }
   };
 
@@ -317,7 +367,9 @@ function Page2() {
             r="30"
             pathLength="1"
             id="indicator"
-            style={{ pathLength: process }}
+            style={{
+              pathLength: progressY,
+            }}
           />
         </svg>
       </HeaderDiv>
@@ -327,7 +379,7 @@ function Page2() {
             paddingBottom: item.id === 6 ? "180px" : 0,
           }}
         >
-          <AskDiv id={id} layoutId={item.id === 1 ? id + "" : null}>
+          <AskDiv id={id}>
             <AskContent>{item.question}</AskContent>
           </AskDiv>
           <Dragdiv>
@@ -351,7 +403,7 @@ function Page2() {
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 4]);
-                DragandDrop(info.point.x, info.point.y, item.id, 1);
+                DragandDrop(info.point.x, info.point.y, item.id, 1, 2.5);
               }}
               style={{
                 visibility: isDropped[item.id - 4]?.scorenum[0]?.dropped
@@ -494,7 +546,8 @@ z"
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 4]);
-                DragandDrop(info.point.x, info.point.y, item.id, 2);
+
+                DragandDrop(info.point.x, info.point.y, item.id, 2, 5);
               }}
               style={{
                 visibility: isDropped[item.id - 4]?.scorenum[1]?.dropped
@@ -717,7 +770,8 @@ z"
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 4]);
-                DragandDrop(info.point.x, info.point.y, item.id, 3);
+
+                DragandDrop(info.point.x, info.point.y, item.id, 3, 7.5);
               }}
               style={{
                 visibility: isDropped[item.id - 4]?.scorenum[2]?.dropped
@@ -946,10 +1000,8 @@ z"
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 4]);
-                DragandDrop(info.point.x, info.point.y, item.id, 4);
-                if (item.id === 6) {
-                  nextPage();
-                }
+
+                DragandDrop(info.point.x, info.point.y, item.id, 4, 10);
               }}
               style={{
                 visibility: isDropped[item.id - 4]?.scorenum[3]?.dropped
@@ -1178,10 +1230,7 @@ z"
       ))}
       <motion.div id="progressY" style={{ scaleX }}></motion.div>
       <Footer>
-        <button
-          style={{ position: "absolute" }}
-          onClick={() => navigate("/page3", { state: { id: id } })}
-        >
+        <button style={{ position: "absolute" }} onClick={() => nextPage()}>
           다음
         </button>
       </Footer>

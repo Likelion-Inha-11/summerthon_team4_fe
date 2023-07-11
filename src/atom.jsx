@@ -1,10 +1,5 @@
 import { atom } from "recoil";
 
-export const testId = atom({
-  key: "testId",
-  default: 0,
-});
-
 export const testObj = atom({
   key: "testObj",
   default: [
@@ -278,58 +273,53 @@ export const testObj = atom({
   ],
 });
 
-export const testProcess = atom({
-  key: "testProcess",
-  default: 0,
-});
-
 export const testResult = atom({
   key: "testResult",
   default: [
     {
-      testid: 1,
-      scores: [
-        {
-          idx: 1,
-          score: 0,
-        },
-        {
-          idx: 2,
-          score: 0,
-        },
-        {
-          idx: 3,
-          score: 0,
-        },
-        {
-          idx: 4,
-          score: 0,
-        },
-        {
-          idx: 5,
-          score: 0,
-        },
-        {
-          idx: 6,
-          score: 0,
-        },
-        {
-          idx: 7,
-          score: 0,
-        },
-        {
-          idx: 8,
-          score: 0,
-        },
-        {
-          idx: 9,
-          score: 0,
-        },
-        {
-          idx: 10,
-          score: 0,
-        },
-      ],
+      idx: 1,
+      score: 0,
+    },
+    {
+      idx: 2,
+      score: 0,
+    },
+    {
+      idx: 3,
+      score: 0,
+    },
+    {
+      idx: 4,
+      score: 0,
+    },
+    {
+      idx: 5,
+      score: 0,
+    },
+    {
+      idx: 6,
+      score: 0,
+    },
+    {
+      idx: 7,
+      score: 0,
+    },
+    {
+      idx: 8,
+      score: 0,
+    },
+    {
+      idx: 9,
+      score: 0,
+    },
+    {
+      idx: 10,
+      score: 0,
     },
   ],
+});
+
+export const testName = atom({
+  key: "testName",
+  default: 3,
 });

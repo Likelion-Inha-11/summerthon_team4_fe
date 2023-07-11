@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Page1 from "./Page1";
-import { testId } from "../atom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -12,7 +11,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url("img/WelcomeBack.png");
+  background: transparent;
 `;
 const TestList = styled(motion.p)`
   font-size: 40px;
@@ -123,13 +122,24 @@ const WrapperVariants = {
 };
 const ColorVariants = {};
 
+const Video = styled.video`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+`;
+
 function Main() {
   const navigate = useNavigate();
   const [id, setId] = useState(null);
-  const setTestId = useSetRecoilState(testId);
-
   return (
     <Wrapper variants={WrapperVariants} initial="load" animate="show">
+      <Video autoPlay loop muted>
+        <source src="bubble.mp4" type="video/mp4" />
+      </Video>
       <TestList variants={TestListVariants} initial="start" animate="end">
         Test List
       </TestList>
@@ -138,7 +148,6 @@ function Main() {
           layoutId={1 + ""}
           onClick={() => {
             setId(1 + "");
-            setTestId(1);
           }}
           variants={ItemVariants}
           initial="start"
@@ -158,7 +167,6 @@ function Main() {
           layoutId={2 + ""}
           onClick={() => {
             setId(2 + "");
-            setTestId(2);
           }}
           variants={ItemVariants}
           initial="start"
@@ -178,7 +186,6 @@ function Main() {
           layoutId={3 + ""}
           onClick={() => {
             setId(3 + "");
-            setTestId(3);
           }}
           variants={ItemVariants}
           initial="start"
@@ -198,7 +205,6 @@ function Main() {
           layoutId={4 + ""}
           onClick={() => {
             setId(4 + "");
-            setTestId(4);
           }}
           variants={ItemVariants}
           initial="start"
