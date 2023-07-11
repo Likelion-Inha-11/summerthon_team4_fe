@@ -165,6 +165,23 @@ function Page3() {
   const [score9, setScore9] = useState(0);
   const [score10, setScore10] = useState(0);
 
+  const oneref = useRef(null);
+  const tworef = useRef(null);
+  const threeref = useRef(null);
+  const fourref = useRef(null);
+
+  function getRef(id) {
+    if (id === 7) {
+      return oneref;
+    } else if (id === 8) {
+      return tworef;
+    } else if (id === 9) {
+      return threeref;
+    } else if (id === 10) {
+      return fourref;
+    }
+  }
+
   console.log(id);
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -340,6 +357,8 @@ function Page3() {
   };
 
   const DragandDrop = (x, y, itemid, num, score) => {
+    const { left, width } = getRef(itemid)?.current?.getBoundingClientRect();
+
     if (itemid === 7) {
       setScore7(score);
     } else if (itemid === 8) {
@@ -349,103 +368,101 @@ function Page3() {
     } else if (itemid === 10) {
       setScore10(score);
     }
-
-    if (x >= 530 && x <= 630) {
-      if (itemid === 7) {
-        if (y >= 300 && y <= 410) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    if (itemid === 7) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 8) {
-        if (y >= 1085 && y <= 1195) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 8) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 9) {
-        if (y >= 1870 && y <= 1980) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 9) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 10) {
-        if (y >= 2660 && y <= 2770) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 10) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
     }
   };
@@ -497,6 +514,7 @@ function Page3() {
           </AskDiv>
           <Dragdiv>
             <DragZone
+              ref={getRef(item.id)}
               variants={DragZoneVariants}
               initial="initial"
               animate="end"

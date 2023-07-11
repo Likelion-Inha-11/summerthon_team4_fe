@@ -162,6 +162,20 @@ function Page1({ id }) {
   const [btnView, setBtnView] = useState(false);
   const scrollRef = useRef(0);
 
+  const oneref = useRef(null);
+  const tworef = useRef(null);
+  const threeref = useRef(null);
+
+  function getRef(id) {
+    if (id === 1) {
+      return oneref;
+    } else if (id === 2) {
+      return tworef;
+    } else if (id === 3) {
+      return threeref;
+    }
+  }
+
   const handleScroll = () => {
     if (window.scrollY > scrollRef.current) {
       setBtnView(true);
@@ -285,6 +299,8 @@ function Page1({ id }) {
   });
 
   const DragandDrop = (x, y, itemid, num, score) => {
+    const { left, width } = getRef(itemid)?.current.getBoundingClientRect();
+
     if (itemid === 1) {
       setScore1(score);
     } else if (itemid === 2) {
@@ -292,78 +308,77 @@ function Page1({ id }) {
     } else if (itemid === 3) {
       setScore3(score);
     }
-    if (x >= 530 && x <= 630) {
-      if (itemid === 1) {
-        if (y >= 310 && y <= 410) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    if (itemid === 1) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 2) {
-        if (y >= 994 && y <= 1094) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 2) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 3) {
-        if (y >= 1683 && y <= 1783) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 3) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
     }
   };
@@ -431,6 +446,7 @@ function Page1({ id }) {
           </AskDiv>
           <Dragdiv>
             <DragZone
+              ref={getRef(item.id)}
               variants={DragZoneVariants}
               initial="initial"
               animate="end"

@@ -196,7 +196,22 @@ function Page2() {
   const [score5, setScore5] = useState(0);
   const [score6, setScore6] = useState(0);
 
+  const oneref = useRef(null);
+  const tworef = useRef(null);
+  const threeref = useRef(null);
+
+  function getRef(id) {
+    if (id === 4) {
+      return oneref;
+    } else if (id === 5) {
+      return tworef;
+    } else if (id === 6) {
+      return threeref;
+    }
+  }
+
   const ref = useRef(null);
+
   const navigate = useNavigate();
 
   const { scrollYProgress: progressY } = useScroll();
@@ -330,7 +345,9 @@ function Page2() {
     });
   };
 
-  const DragandDrop = (x, y, itemid, num, score) => {
+  const DragandDrop = (x, ty, itemid, num, score) => {
+    const { left, width } = getRef(itemid)?.current.getBoundingClientRect();
+
     if (itemid === 4) {
       setScore4(score);
     } else if (itemid === 5) {
@@ -339,80 +356,154 @@ function Page2() {
       setScore6(score);
     }
 
-    if (x >= 530 && x <= 630) {
-      if (itemid === 4) {
-        if (y >= 300 && y <= 410) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    if (itemid === 4) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 5) {
-        if (y >= 1085 && y <= 1195) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 5) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
-      if (itemid === 6) {
-        if (y >= 1870 && y <= 1980) {
-          setIsDropped((prevState) =>
-            prevState.map((obj) => {
-              if (obj?.id === itemid) {
-                return {
-                  ...obj,
-                  checked: true,
-                  scorenum: obj?.scorenum?.map((scoreobj) => {
-                    if (scoreobj?.num === num) {
-                      return {
-                        ...scoreobj,
-                        dropped: true,
-                      };
-                    }
-                    return scoreobj;
-                  }),
-                };
-              }
-              return obj;
-            })
-          );
-        }
+    } else if (itemid === 6) {
+      console.log(left, width);
+      if (x >= left && x <= left + width) {
+        setIsDropped((prevState) =>
+          prevState.map((obj) => {
+            if (obj?.id === itemid) {
+              return {
+                ...obj,
+                checked: true,
+                scorenum: obj?.scorenum?.map((scoreobj) => {
+                  if (scoreobj?.num === num) {
+                    return {
+                      ...scoreobj,
+                      dropped: true,
+                    };
+                  }
+                  return scoreobj;
+                }),
+              };
+            }
+            return obj;
+          })
+        );
       }
     }
+
+    // if (x >= 530 && x <= 630) {
+    //   if (itemid === 4) {
+    //     if (y >= 300 && y <= 410) {
+    //       setIsDropped((prevState) =>
+    //         prevState.map((obj) => {
+    //           if (obj?.id === itemid) {
+    //             return {
+    //               ...obj,
+    //               checked: true,
+    //               scorenum: obj?.scorenum?.map((scoreobj) => {
+    //                 if (scoreobj?.num === num) {
+    //                   return {
+    //                     ...scoreobj,
+    //                     dropped: true,
+    //                   };
+    //                 }
+    //                 return scoreobj;
+    //               }),
+    //             };
+    //           }
+    //           return obj;
+    //         })
+    //       );
+    //     }
+    //   }
+    //   if (itemid === 5) {
+    //     if (y >= 1085 && y <= 1195) {
+    //       setIsDropped((prevState) =>
+    //         prevState.map((obj) => {
+    //           if (obj?.id === itemid) {
+    //             return {
+    //               ...obj,
+    //               checked: true,
+    //               scorenum: obj?.scorenum?.map((scoreobj) => {
+    //                 if (scoreobj?.num === num) {
+    //                   return {
+    //                     ...scoreobj,
+    //                     dropped: true,
+    //                   };
+    //                 }
+    //                 return scoreobj;
+    //               }),
+    //             };
+    //           }
+    //           return obj;
+    //         })
+    //       );
+    //     }
+    //   }
+    //   if (itemid === 6) {
+    //     if (y >= 1870 && y <= 1980) {
+    //       setIsDropped((prevState) =>
+    //         prevState.map((obj) => {
+    //           if (obj?.id === itemid) {
+    //             return {
+    //               ...obj,
+    //               checked: true,
+    //               scorenum: obj?.scorenum?.map((scoreobj) => {
+    //                 if (scoreobj?.num === num) {
+    //                   return {
+    //                     ...scoreobj,
+    //                     dropped: true,
+    //                   };
+    //                 }
+    //                 return scoreobj;
+    //               }),
+    //             };
+    //           }
+    //           return obj;
+    //         })
+    //       );
+    //     }
+    //   }
+    // }
   };
 
   return (
@@ -460,6 +551,7 @@ function Page2() {
           </AskDiv>
           <Dragdiv>
             <DragZone
+              ref={getRef(item.id)}
               variants={DragZoneVariants}
               initial="initial"
               animate="end"
