@@ -293,26 +293,78 @@ function Page1({ id }) {
       setScore3(score);
     }
     if (x >= 530 && x <= 630) {
-      setIsDropped((prevState) =>
-        prevState.map((obj) => {
-          if (obj?.id === itemid) {
-            return {
-              ...obj,
-              checked: true,
-              scorenum: obj?.scorenum?.map((scoreobj) => {
-                if (scoreobj?.num === num) {
-                  return {
-                    ...scoreobj,
-                    dropped: true,
-                  };
-                }
-                return scoreobj;
-              }),
-            };
-          }
-          return obj;
-        })
-      );
+      if (itemid === 1) {
+        if (y >= 310 && y <= 410) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
+      if (itemid === 2) {
+        if (y >= 994 && y <= 1094) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
+      if (itemid === 3) {
+        if (y >= 1683 && y <= 1783) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
     }
   };
   const nextPage = () => {

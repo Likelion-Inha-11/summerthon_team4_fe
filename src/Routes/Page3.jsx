@@ -282,6 +282,28 @@ function Page3() {
     restDelta: 0.001,
   });
   const nextPage = () => {
+    setResult((obj) =>
+      obj.map((item) => {
+        if (item?.idx === 4) {
+          return {
+            ...item,
+            score: score7,
+          };
+        } else if (item?.idx === 5) {
+          return {
+            ...item,
+            score: score8,
+          };
+        } else if (item?.idx === 6) {
+          return {
+            ...item,
+            score: score9,
+          };
+        }
+        return item;
+      })
+    );
+
     navigate("/load", {
       state: {
         score7,
@@ -329,28 +351,101 @@ function Page3() {
     }
 
     if (x >= 530 && x <= 630) {
-      setIsDropped((prevState) =>
-        prevState.map((obj) => {
-          if (obj?.id === itemid) {
-            return {
-              ...obj,
-              checked: true,
-              scorenum: obj?.scorenum.map((scoreobj) => {
-                if (scoreobj?.num === num) {
-                  return {
-                    ...scoreobj,
-                    dropped: true,
-                  };
-                }
-                return scoreobj;
-              }),
-            };
-          }
-          return obj;
-        })
-      );
+      if (itemid === 7) {
+        if (y >= 300 && y <= 410) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
+      if (itemid === 8) {
+        if (y >= 1085 && y <= 1195) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
+      if (itemid === 9) {
+        if (y >= 1870 && y <= 1980) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
       if (itemid === 10) {
-        handleScore();
+        if (y >= 2660 && y <= 2770) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
       }
     }
   };
@@ -407,7 +502,7 @@ function Page3() {
               animate="end"
               style={{
                 background: isDropped[item.id - 7]?.checked
-                  ? "url('img/sim2.png')"
+                  ? "linear-gradient(135deg, rgba(255, 203, 160, 0.8), rgba(221, 87, 137, 0.8), rgba(155, 91, 230, 0.8))"
                   : "rgba(255,255,255,1)",
                 border: isDropped[item.id - 7]?.checked
                   ? "rgba(255, 201, 0)"
@@ -421,7 +516,7 @@ function Page3() {
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 7]);
-
+                console.log(info.point.x, info.point.y);
                 DragandDrop(info.point.x, info.point.y, item.id, 1, 2.5);
               }}
               style={{

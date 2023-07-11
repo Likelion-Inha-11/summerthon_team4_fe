@@ -200,7 +200,7 @@ function Page2() {
   const navigate = useNavigate();
 
   const { scrollYProgress: progressY } = useScroll();
-  const { scrollYProgress: scrollMandatory } = useScroll({ target: ref });
+  const { scrollY } = useScroll({ target: ref });
 
   const [isDropped, setIsDropped] = useState([]);
   useEffect(() => {
@@ -298,18 +298,8 @@ function Page2() {
   const nextPage = () => {
     scrollToTop();
 
-    navigate("/page3", {
-      state: {
-        id: id,
-        score4,
-        score5,
-        score6,
-      },
-    });
-  };
-  const handleScore = async () => {
-    await setResult((obj) =>
-      obj?.map((item) => {
+    setResult((obj) =>
+      obj.map((item) => {
         if (item?.idx === 1) {
           return {
             ...item,
@@ -329,6 +319,15 @@ function Page2() {
         return item;
       })
     );
+
+    navigate("/page3", {
+      state: {
+        id: id,
+        score4,
+        score5,
+        score6,
+      },
+    });
   };
 
   const DragandDrop = (x, y, itemid, num, score) => {
@@ -341,28 +340,77 @@ function Page2() {
     }
 
     if (x >= 530 && x <= 630) {
-      setIsDropped((prevState) =>
-        prevState.map((obj) => {
-          if (obj.id === itemid) {
-            return {
-              ...obj,
-              checked: true,
-              scorenum: obj.scorenum.map((scoreobj) => {
-                if (scoreobj.num === num) {
-                  return {
-                    ...scoreobj,
-                    dropped: true,
-                  };
-                }
-                return scoreobj;
-              }),
-            };
-          }
-          return obj;
-        })
-      );
+      if (itemid === 4) {
+        if (y >= 300 && y <= 410) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
+      if (itemid === 5) {
+        if (y >= 1085 && y <= 1195) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
+      }
       if (itemid === 6) {
-        handleScore();
+        if (y >= 1870 && y <= 1980) {
+          setIsDropped((prevState) =>
+            prevState.map((obj) => {
+              if (obj?.id === itemid) {
+                return {
+                  ...obj,
+                  checked: true,
+                  scorenum: obj?.scorenum?.map((scoreobj) => {
+                    if (scoreobj?.num === num) {
+                      return {
+                        ...scoreobj,
+                        dropped: true,
+                      };
+                    }
+                    return scoreobj;
+                  }),
+                };
+              }
+              return obj;
+            })
+          );
+        }
       }
     }
   };
@@ -431,6 +479,7 @@ function Page2() {
             <ScoreBox
               onPanEnd={(e, info) => {
                 console.log(isDropped[item.id - 4]);
+                console.log(info.point.x, info.point.y);
                 DragandDrop(info.point.x, info.point.y, item.id, 1, 2.5);
               }}
               style={{
