@@ -19,8 +19,7 @@ const Wrapper = styled(motion.div)`
   padding-top: 70px;
 `;
 const Svg = styled.svg`
-  width: 330px;
-  height: 330px;
+  width: 90%;
   path {
     stroke: gold;
     stroke-width: 4;

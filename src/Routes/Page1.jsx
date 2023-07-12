@@ -99,9 +99,9 @@ const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 375px;
-  padding: 30px 30px 0px 30px;
-  height: 100px;
+  width: 100%;
+  padding: 20px;
+  height: 70px;
   position: fixed;
   z-index: 10;
   border-bottom: 1.5px solid rgba(221, 87, 137, 0.8);
@@ -356,8 +356,8 @@ function Page1({ id }) {
             return obj;
           })
         );
+        onContent2Click();
       }
-      onContent2Click();
     } else if (itemid === 2) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -381,8 +381,8 @@ function Page1({ id }) {
             return obj;
           })
         );
+        onContent3Click();
       }
-      onContent3Click();
     } else if (itemid === 3) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -422,21 +422,6 @@ function Page1({ id }) {
     });
   };
 
-  // const setScoreForIndex = (index, score) => {
-  //   setScores((prevScores) => {
-  //     const existingScoreIndex = prevScores.findIndex(
-  //       (item) => item.idx === index
-  //     );
-  //     if (existingScoreIndex !== -1) {
-  //       const updatedScores = [...prevScores];
-  //       updatedScores[existingScoreIndex] = { idx: index, score: score };
-  //       return updatedScores;
-  //     } else {
-  //       return [...prevScores, { idx: index, score: score }];
-  //     }
-  //   });
-  // };
-
   return (
     <Wrapper id={id} ref={ref}>
       <HeaderDiv>
@@ -450,7 +435,7 @@ function Page1({ id }) {
             Back
           </p>
         </div>
-        <svg id="totalprogress" width="70" height="70" viewBox="0 0 100 100">
+        <svg id="totalprogress" width="60" height="60" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="30" pathLength="1" />
           <motion.circle
             cx="50"

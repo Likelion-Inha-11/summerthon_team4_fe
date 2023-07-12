@@ -25,7 +25,7 @@ const Container = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   scroll-snap-align: center;
-  height: 100vh;
+  height: 90vh;
   position: relative;
   top: 0;
   left: 0;
@@ -87,9 +87,9 @@ const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 375px;
-  padding: 30px 30px 0px 30px;
-  height: 100px;
+  width: 100%;
+  padding: 20px;
+  height: 70px;
   position: fixed;
   z-index: 1;
   border-bottom: 1.5px solid rgba(221, 87, 137, 0.8);
@@ -422,8 +422,8 @@ function Page3() {
             return obj;
           })
         );
+        onContent2Click();
       }
-      onContent2Click();
     } else if (itemid === 8) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -447,8 +447,8 @@ function Page3() {
             return obj;
           })
         );
+        onContent3Click();
       }
-      onContent3Click();
     } else if (itemid === 9) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -472,8 +472,8 @@ function Page3() {
             return obj;
           })
         );
+        onContent4Click();
       }
-      onContent4Click();
     } else if (itemid === 10) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -525,7 +525,7 @@ function Page3() {
             Back
           </p>
         </div>
-        <svg id="totalprogress" width="70" height="70" viewBox="0 0 100 100">
+        <svg id="totalprogress" width="60" height="60" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="30" pathLength="1" />
           <motion.circle
             cx="50"
