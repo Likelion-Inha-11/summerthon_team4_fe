@@ -58,7 +58,7 @@ html {
 	background: rgba(255, 255, 255, 1);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(221, 87, 137, 0.8);
+  background: #ff0000;
   -webkit-border-radius: 3ex;
 }
 
@@ -73,7 +73,7 @@ html {
   	left: 10px;
   	right: 0;
   	height: 5px;
-  	background: rgba(221,87,137,0.8);
+  	background: #ff0000;
   	bottom: 65px;
 }
 circle {
@@ -82,7 +82,7 @@ circle {
   fill: none;
 }
 #indicator{
-	stroke: rgba(221,87,137,0.8);
+	stroke: #ff0000;
 }
     }
 `;

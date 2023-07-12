@@ -92,7 +92,7 @@ const HeaderDiv = styled.div`
   height: 70px;
   position: fixed;
   z-index: 1;
-  border-bottom: 1.5px solid rgba(221, 87, 137, 0.8);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 1);
   background-color: rgba(255, 255, 255, 1);
   div i,
   div p {
@@ -555,15 +555,15 @@ function Page3() {
               animate="end"
               style={{
                 background: isDropped[item.id - 7]?.checked
-                  ? "linear-gradient(135deg, rgba(255, 203, 160, 0.8), rgba(221, 87, 137, 0.8), rgba(155, 91, 230, 0.8))"
-                  : "rgba(255,255,255,1)",
+                ? `url(img/3D심금.png) center/cover no-repeat`
+                : "rgba(255, 255, 255, 1)",
+                backgroundSize: isDropped[item.id - 7]?.checked ? "120%" : "auto",
                 border: isDropped[item.id - 7]?.checked
-                  ? "rgba(255, 201, 0)"
-                  : "4px dotted rgba(221, 87, 137, 0.8)",
-              }}
-            >
-              <p>Drag</p>
-            </DragZone>
+                ? "none"
+                : "4px dotted rgba(0,0,0,1)",
+                }}>
+                  {isDropped[item.id - 7]?.checked ? null : <p>Drag</p>}
+             </DragZone>
           </Dragdiv>
           <ScoreGrid>
             <ScoreBox
