@@ -201,6 +201,20 @@ function Page2() {
   const tworef = useRef(null);
   const threeref = useRef(null);
 
+  const cononeref = useRef(null);
+  const contworef = useRef(null);
+  const conthreeref = useRef(null);
+
+  function getconRef(id) {
+    if (id === 4) {
+      return cononeref;
+    } else if (id === 5) {
+      return contworef;
+    } else if (id === 6) {
+      return conthreeref;
+    }
+  }
+
   function getRef(id) {
     if (id === 4) {
       return oneref;
@@ -210,6 +224,16 @@ function Page2() {
       return threeref;
     }
   }
+
+  const onContent1Click = () => {
+    cononeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent2Click = () => {
+    contworef.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent3Click = () => {
+    conthreeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
 
   const ref = useRef(null);
 
@@ -381,6 +405,7 @@ function Page2() {
           })
         );
       }
+      onContent2Click();
     } else if (itemid === 5) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -405,6 +430,7 @@ function Page2() {
           })
         );
       }
+      onContent3Click();
     } else if (itemid === 6) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -430,81 +456,6 @@ function Page2() {
         );
       }
     }
-
-    // if (x >= 530 && x <= 630) {
-    //   if (itemid === 4) {
-    //     if (y >= 300 && y <= 410) {
-    //       setIsDropped((prevState) =>
-    //         prevState.map((obj) => {
-    //           if (obj?.id === itemid) {
-    //             return {
-    //               ...obj,
-    //               checked: true,
-    //               scorenum: obj?.scorenum?.map((scoreobj) => {
-    //                 if (scoreobj?.num === num) {
-    //                   return {
-    //                     ...scoreobj,
-    //                     dropped: true,
-    //                   };
-    //                 }
-    //                 return scoreobj;
-    //               }),
-    //             };
-    //           }
-    //           return obj;
-    //         })
-    //       );
-    //     }
-    //   }
-    //   if (itemid === 5) {
-    //     if (y >= 1085 && y <= 1195) {
-    //       setIsDropped((prevState) =>
-    //         prevState.map((obj) => {
-    //           if (obj?.id === itemid) {
-    //             return {
-    //               ...obj,
-    //               checked: true,
-    //               scorenum: obj?.scorenum?.map((scoreobj) => {
-    //                 if (scoreobj?.num === num) {
-    //                   return {
-    //                     ...scoreobj,
-    //                     dropped: true,
-    //                   };
-    //                 }
-    //                 return scoreobj;
-    //               }),
-    //             };
-    //           }
-    //           return obj;
-    //         })
-    //       );
-    //     }
-    //   }
-    //   if (itemid === 6) {
-    //     if (y >= 1870 && y <= 1980) {
-    //       setIsDropped((prevState) =>
-    //         prevState.map((obj) => {
-    //           if (obj?.id === itemid) {
-    //             return {
-    //               ...obj,
-    //               checked: true,
-    //               scorenum: obj?.scorenum?.map((scoreobj) => {
-    //                 if (scoreobj?.num === num) {
-    //                   return {
-    //                     ...scoreobj,
-    //                     dropped: true,
-    //                   };
-    //                 }
-    //                 return scoreobj;
-    //               }),
-    //             };
-    //           }
-    //           return obj;
-    //         })
-    //       );
-    //     }
-    //   }
-    // }
   };
 
   return (
@@ -543,6 +494,7 @@ function Page2() {
       </HeaderDiv>
       {questions.slice(3, 6).map((item) => (
         <Container
+          ref={getconRef(item.id)}
           style={{
             paddingBottom: item.id === 6 ? "180px" : 0,
           }}
@@ -1401,12 +1353,12 @@ z"
       <motion.div id="progressY" style={{ scaleX }}></motion.div>
       <Footer>
         <img
-        style={{ position: "absolute"}}
-        src="img/다음 심금 깜장.png"
-        height="60rem"
-        onClick={() => {
-          nextPage();
-        }}
+          style={{ position: "absolute" }}
+          src="img/다음 심금 깜장.png"
+          height="60rem"
+          onClick={() => {
+            nextPage();
+          }}
         />
       </Footer>
     </Wrapper>

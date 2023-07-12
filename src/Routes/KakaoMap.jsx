@@ -86,8 +86,8 @@ function KakaoMap() {
     const container = document.getElementById("map");
 
     const options = {
-      center: new window.kakao.maps.LatLng(37.566535, 126.9779692),
-      level: 5,
+      center: new window.kakao.maps.LatLng(37.5341203159822, 126.897335759076),
+      level: 4,
     };
 
     const map = new window.kakao.maps.Map(container, options);

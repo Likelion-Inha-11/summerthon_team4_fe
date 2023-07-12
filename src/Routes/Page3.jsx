@@ -171,6 +171,23 @@ function Page3() {
   const threeref = useRef(null);
   const fourref = useRef(null);
 
+  const cononeref = useRef(null);
+  const contworef = useRef(null);
+  const conthreeref = useRef(null);
+  const confourref = useRef(null);
+
+  function getconRef(id) {
+    if (id === 7) {
+      return cononeref;
+    } else if (id === 8) {
+      return contworef;
+    } else if (id === 9) {
+      return conthreeref;
+    } else if (id === 10) {
+      return confourref;
+    }
+  }
+
   function getRef(id) {
     if (id === 7) {
       return oneref;
@@ -182,6 +199,19 @@ function Page3() {
       return fourref;
     }
   }
+
+  const onContent1Click = () => {
+    cononeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent2Click = () => {
+    contworef.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent3Click = () => {
+    conthreeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent4Click = () => {
+    confourref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
 
   console.log(id);
   const ref = useRef(null);
@@ -393,6 +423,7 @@ function Page3() {
           })
         );
       }
+      onContent2Click();
     } else if (itemid === 8) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -417,6 +448,7 @@ function Page3() {
           })
         );
       }
+      onContent3Click();
     } else if (itemid === 9) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -441,6 +473,7 @@ function Page3() {
           })
         );
       }
+      onContent4Click();
     } else if (itemid === 10) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -500,12 +533,13 @@ function Page3() {
             r="30"
             pathLength="1"
             id="indicator"
-            style={{ pathLength: 0 }}
+            style={{ pathLength: progressY }}
           />
         </svg>
       </HeaderDiv>
       {questions.slice(6, 10).map((item) => (
         <Container
+          ref={getconRef(item.id)}
           style={{
             paddingBottom: item.id === 10 ? "180px" : 0,
           }}
@@ -1367,12 +1401,12 @@ z"
       <motion.div id="progressY" style={{ scaleX }}></motion.div>
       <Footer>
         <img
-        style={{ position: "absolute"}}
-        src="img/다음 심금 깜장.png"
-        height="60rem"
-        onClick={() => {
-          nextPage();
-        }}
+          style={{ position: "absolute" }}
+          src="img/다음 심금 깜장.png"
+          height="60rem"
+          onClick={() => {
+            nextPage();
+          }}
         />
       </Footer>
     </Wrapper>

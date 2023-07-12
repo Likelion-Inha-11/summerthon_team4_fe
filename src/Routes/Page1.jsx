@@ -167,6 +167,20 @@ function Page1({ id }) {
   const tworef = useRef(null);
   const threeref = useRef(null);
 
+  const cononeref = useRef(null);
+  const contworef = useRef(null);
+  const conthreeref = useRef(null);
+
+  function getconRef(id) {
+    if (id === 1) {
+      return cononeref;
+    } else if (id === 2) {
+      return contworef;
+    } else if (id === 3) {
+      return conthreeref;
+    }
+  }
+
   function getRef(id) {
     if (id === 1) {
       return oneref;
@@ -184,6 +198,16 @@ function Page1({ id }) {
       setBtnView(false);
     }
     scrollRef.current = window.scrollY;
+  };
+
+  const onContent1Click = () => {
+    cononeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent2Click = () => {
+    contworef.current?.scrollIntoView({ top: 0, behavior: "smooth" });
+  };
+  const onContent3Click = () => {
+    conthreeref.current?.scrollIntoView({ top: 0, behavior: "smooth" });
   };
 
   const scrollToTop = () => {
@@ -333,6 +357,7 @@ function Page1({ id }) {
           })
         );
       }
+      onContent2Click();
     } else if (itemid === 2) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -357,6 +382,7 @@ function Page1({ id }) {
           })
         );
       }
+      onContent3Click();
     } else if (itemid === 3) {
       console.log(left, width);
       if (x >= left && x <= left + width) {
@@ -438,6 +464,7 @@ function Page1({ id }) {
       </HeaderDiv>
       {questions.slice(0, 3).map((item) => (
         <Container
+          ref={getconRef(item.id)}
           style={{
             paddingBottom: item.id === 3 ? "180px" : 0,
           }}
@@ -1383,12 +1410,12 @@ z"
       <motion.div id="progressY" style={{ scaleX }}></motion.div>
       <Footer>
         <img
-        style={{ position: "absolute"}}
-        src="img/다음 심금 깜장.png"
-        height="60rem"
-        onClick={() => {
-          nextPage();
-        }}
+          style={{ position: "absolute" }}
+          src="img/다음 심금 깜장.png"
+          height="60rem"
+          onClick={() => {
+            nextPage();
+          }}
         />
       </Footer>
     </Wrapper>
