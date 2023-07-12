@@ -10,7 +10,6 @@ import {
 import { testObj, testResult } from "../atom";
 
 const Wrapper = styled(motion.div)`
-  width: 375px;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
@@ -25,46 +24,46 @@ const Container = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   scroll-snap-align: center;
-  height: 90vh;
+  height: 100vh;
   position: relative;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 3rem 0px;
 `;
 const AskDiv = styled(motion.div)`
   background: url("img/bg${(props) => props.id}.png");
   background-size: 100% 100%;
   flex-shrink: 0;
   width: 100%;
-  height: 140px;
+  height: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 140px;
   position: relative;
 `;
 const Dragdiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 1rem;
 `;
 const DragZone = styled(motion.div)`
-  width: 110px;
-  height: 110px;
-  border-radius: 47%;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const ScoreGrid = styled(motion.div)`
   display: grid;
-  width: 70%;
+  width: 80%;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 20px;
-  column-gap: 20px;
-  margin-top: 20px;
+  row-gap: 1rem;
+  column-gap: 1rem;
+  margin-top: 0.8rem;
 `;
 const ScoreBox = styled(motion.div)`
   background-color: transparent;
@@ -74,7 +73,7 @@ const ScoreBox = styled(motion.div)`
   border: none;
 `;
 const AskContent = styled.p`
-  margin-top: 10px;
+  margin-top: 1rem;
   width: 80%;
   text-align: center;
   line-height: 1.2;
@@ -88,10 +87,10 @@ const HeaderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
-  height: 70px;
+  padding: 1rem;
+  height: 4rem;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   border-bottom: 1.5px solid rgba(221, 87, 137, 0.8);
   background-color: rgba(255, 255, 255, 1);
   div i,
@@ -107,7 +106,7 @@ const Footer = styled.div`
   left: 0;
   bottom: 0;
   z-index: 1;
-  padding: 30px;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -150,7 +149,7 @@ const WrapperVariants = {
 };
 const Svg = styled(motion.svg)`
   border: none;
-  width: 120px;
+  width: 9rem;
 `;
 
 function Page3() {
@@ -541,7 +540,7 @@ function Page3() {
         <Container
           ref={getconRef(item.id)}
           style={{
-            paddingBottom: item.id === 10 ? "180px" : 0,
+            paddingBottom: item.id === 10 ? 150 : 0,
           }}
         >
           <AskDiv id={id}>

@@ -3,15 +3,19 @@ import styled from "styled-components";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Wrapper = styled(motion.div)`
-  width: 375px;
+  width: 768px;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background-color: #faf9fe;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Box = styled(motion.div)`
   width: 90%;
@@ -23,26 +27,38 @@ const Box = styled(motion.div)`
   flex-direction: column;
   align-items: center;
 `;
-const SearchForm = styled.form`
-  width: 90%;
+const SearchForm = styled(motion.div)`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 const SearchBar = styled(motion.input)`
   height: 40px;
-  width: 85%;
+  width: 100%;
   margin: 20px 0px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   padding-left: 15px;
+  position: relative;
 `;
 const SearchBtn = styled.button`
-  border: none;
+  position: absolute;
+  right: 1rem;
+  top: 1.1rem;
+  color: black;
   background-color: transparent;
-  font-size: 26px;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
   padding-top: 5px;
   margin-left: 7px;
+`;
+const SearchHeader = styled.div`
+  width: 60%;
+  position: relative;
 `;
 const WrapperVariants = {
   load: { opacity: 0 },
@@ -105,14 +121,14 @@ function KakaoMap() {
       );
       map.setCenter(moveLocation);
 
-      var positions = center.map((item) => {
+      var positions = center?.map((item) => {
         return {
           title: item?.place_name,
           latlng: new window.kakao.maps.LatLng(item?.y, item?.x),
         };
       });
 
-      for (let i = 0; i < positions.length; ++i) {
+      for (let i = 0; i < positions?.length; ++i) {
         var marker = new window.kakao.maps.Marker({
           map,
           position: positions[i]?.latlng,
@@ -134,9 +150,9 @@ function KakaoMap() {
       }
     );
     const json = await response.json();
-    console.log(json.documents);
+    console.log(json?.documents);
 
-    setCenter(json.documents.slice(0, 6));
+    setCenter(json?.documents?.slice(0, 6));
   };
 
   return (
@@ -149,14 +165,16 @@ function KakaoMap() {
       >
         <Box variants={BoxVariants} initial="initial" animate="end">
           <SearchForm onSubmit={(event) => handleSearch(event)}>
-            <SearchBar
-              onChange={(event) => setKeyword(event.target.value)}
-              type="text"
-              placeholder="검색"
-            ></SearchBar>
-            <SearchBtn type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </SearchBtn>
+            <SearchHeader>
+              <SearchBar
+                onChange={(event) => setKeyword(event.target.value)}
+                type="text"
+                placeholder="검색"
+              ></SearchBar>
+              <SearchBtn type="submit">
+                <AiOutlineSearch />
+              </SearchBtn>
+            </SearchHeader>
           </SearchForm>
           <div
             id="map"
