@@ -21,9 +21,9 @@ export default () =>{
             objectType: 'feed',
             content: {
                 title: '오늘 심금 테스트',
-                description: '아메리카노, 빵, 케익', //자신이 진행한 검사에 대한 설명 조금 const로 적어야 할까?
+                description: '나는 우울증 테스트를 해봤어', //자신이 진행한 검사에 대한 설명 조금 const로 적어야 할까?
                 imageUrl:
-                'public/img/sim1.png',
+                'https://raw.githubusercontent.com/Likelion-Inha-11/summerthon_team4_fe/main/public/img/sim1.png',
                 link: {
                     mobileWebUrl: realUrl,
                 },
