@@ -1402,8 +1402,8 @@ z"
       <Footer>
         <img
           style={{ position: "absolute" }}
-          src="img/다음 심금 깜장.png"
-          height="60rem"
+          src="img/뿡뿡심금.png"
+          height="55rem"
           onClick={() => {
             nextPage();
           }}
