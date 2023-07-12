@@ -9,13 +9,15 @@ import { testName, testResult } from "../atom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const Wrapper = styled(motion.div)`
-  width: 375px;
-  height: 100vh;
+  width: 768px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   background-color: #faf9fe;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Title = styled.p`
   width: 90%;
@@ -24,12 +26,12 @@ const Title = styled.p`
   align-items: center;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  padding: 30px;
+  font-size: 1.4rem;
+  padding: 2rem;
 `;
 const Chart = styled(motion.div)`
   width: 100%;
-  max-height: 30vh;
+  height: 12rem;
   margin-left: 15px;
   display: flex;
   justify-content: center;
@@ -42,13 +44,13 @@ const MidDiv = styled(motion.div)`
     grid-column: span 2;
   }
   width: 90%;
-  column-gap: 10px;
-  row-gap: 10px;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
 `;
 const Detail = styled(motion.div)`
   width: 100%;
   background-color: rgba(255, 255, 255, 1);
-  height: 70px;
+  height: 3.7rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   display: flex;
@@ -65,7 +67,7 @@ const Detail = styled(motion.div)`
 const ShareDiv = styled(motion.div)`
   width: 100%;
   background-color: rgba(255, 255, 255, 1);
-  height: 70px;
+  height: 3.7rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   &:hover {
@@ -82,7 +84,7 @@ const ShareDiv = styled(motion.div)`
 const OtherTest = styled(motion.div)`
   width: 100%;
   background-color: rgba(255, 255, 255, 1);
-  height: 70px;
+  height: 3.7rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   &:hover {
@@ -98,33 +100,32 @@ const OtherTest = styled(motion.div)`
 `;
 const Map = styled(motion.div)`
   width: 90%;
-  height: 240px;
+  height: 90%;
   background-color: rgba(255, 255, 255, 1);
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  margin-top: 40px;
+  margin-top: 1.6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   p {
-    height: 20px;
+    height: 1rem;
     width: 100%;
     font-family: "Noto Sans KR", sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.9rem;
     margin-left: 30px;
     margin-top: 13px;
-    margin-bottom: 7px;
   }
 `;
 const MapContainer = styled(motion.div)`
   width: 100%;
+  padding: 1rem 1rem;
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 `;
 const Overlay = styled(motion.div)`
   width: 100%;
@@ -145,7 +146,7 @@ const OverlayVariants = {
   },
 };
 const Box = styled(motion.div)`
-  overflow: scroll;
+  overflow: scroll-y;
   height: 200px;
   width: 300px;
   border-radius: 40px;
@@ -498,7 +499,7 @@ function ShowResult() {
           <p>자세히보기</p>
         </Detail>
         <ShareDiv>
-          <KakaoShare/>
+          <KakaoShare />
         </ShareDiv>
         <OtherTest layoutId={3 + ""} onClick={() => setId(3)}>
           <p>다른 검사</p>
@@ -507,7 +508,7 @@ function ShowResult() {
       <Map layoutId={4 + ""} onClick={() => setId(4)}>
         <p>인근 병원</p>
         <MapContainer>
-          <img src="img/map.png" width="300" alt="Map" height="190"></img>
+          <img src="img/map.png" width="100%" alt="Map" height="100%"></img>
         </MapContainer>
       </Map>
       <AnimatePresence>

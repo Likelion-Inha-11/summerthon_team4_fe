@@ -7,28 +7,36 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
-  width: 375px;
+  width: 768px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   background: transparent;
+  background-image: url("img/BlueBubble.gif");
+  background-size: cover;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const TestList = styled(motion.p)`
   font-size: 40px;
   color: black;
-  padding-top: 100px;
+  padding-top: 5rem;
   font-family: "Seymour One", sans-serif;
 `;
 const TestGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  width: 80%;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  width: 100%;
+  padding: 2rem;
   height: 60%;
-  margin-top: 50px;
+  margin-top: 1rem;
 `;
 const ItemBox = styled(motion.div)`
   position: relative;
+  width: 100%;
   div {
     width: 100%;
     height: 60%;
@@ -38,27 +46,26 @@ const ItemBox = styled(motion.div)`
   }
   p {
     width: 100%;
-    height: 40px;
+    height: 2rem;
     border: 1px solid rgba(0, 0, 0, 0.7);
     border-top: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 600;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
 `;
 const Cf = styled.span`
-  width: 130px;
   position: absolute;
   right: 5px;
   text-align: end;
-  bottom: 32px;
-  font-size: 2px;
+  bottom: 0.3rem;
+  font-size: 0.6rem;
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 300;
+  font-weight: 500;
 `;
 const TestListVariants = {
   start: { scale: 0 },
@@ -122,24 +129,11 @@ const WrapperVariants = {
 };
 const ColorVariants = {};
 
-const Video = styled.video`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-`;
-
 function Main() {
   const navigate = useNavigate();
   const [id, setId] = useState(null);
   return (
     <Wrapper variants={WrapperVariants} initial="load" animate="show">
-      <Video autoPlay loop muted>
-        <source src="bubble.mp4" type="video/mp4" />
-      </Video>
       <TestList variants={TestListVariants} initial="start" animate="end">
         Test List
       </TestList>

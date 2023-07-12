@@ -11,15 +11,22 @@ import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
-  width: 375px;
+  width: 768px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top: 70px;
+  padding-top: 4rem;
+  background: transparent;
+  background-image: url("img/BlueBubble.gif");
+  background-size: cover;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Svg = styled.svg`
-  width: 90%;
+  width: 105%;
+  margin-left: 0.7rem;
   path {
     stroke: gold;
     stroke-width: 4;
@@ -39,10 +46,10 @@ const TestBtn = styled.button`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   width: 80%;
   background-color: #ffc900;
-  height: 50px;
+  height: 3rem;
   border: none;
   border-radius: 30px;
-  font-size: 18px;
+  font-size: 1.5rem;
   color: white;
   transition: all 0.15s ease-in-out;
   &:hover {
@@ -53,14 +60,14 @@ const TestBtn = styled.button`
 const KakaoBtn = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   width: 90%;
-  height: 50px;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
   border-radius: 20px;
   color: #5a94f5;
-  font-size: 16px;
+  font-size: 1rem;
   margin-top: 10px;
   transition: all 0.15s ease-in-out;
   &:hover {
@@ -68,12 +75,12 @@ const KakaoBtn = styled.div`
     transform: scale(1.08);
   }
   img {
-    width: 40px;
+    width: 2.5rem;
     height: 80%;
   }
   p {
     font-weight: 600;
-    margin-left: 15px;
+    margin-left: 1rem;
   }
 `;
 const BottomWrap = styled.div`
@@ -81,16 +88,7 @@ const BottomWrap = styled.div`
   flex-direction: column;
   align-items: center;
   width: 70%;
-  margin-bottom: 140px;
-`;
-const Video = styled.video`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  margin-bottom: 6rem;
 `;
 function Welcome() {
   const navigate = useNavigate();
@@ -112,9 +110,6 @@ function Welcome() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
     <Wrapper style={{}}>
-      <Video autoPlay loop muted>
-        <source src="bubble.mp4" type="video/mp4" />
-      </Video>
       <Svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
