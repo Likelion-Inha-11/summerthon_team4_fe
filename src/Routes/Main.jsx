@@ -12,6 +12,10 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   background: transparent;
+  background-image: url("img/BlueBubble.gif");
+  background-size: cover;
+  
+
 `;
 const TestList = styled(motion.p)`
   font-size: 40px;

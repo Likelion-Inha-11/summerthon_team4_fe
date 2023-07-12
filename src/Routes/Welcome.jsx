@@ -17,6 +17,9 @@ const Wrapper = styled(motion.div)`
   align-items: center;
   justify-content: space-between;
   padding-top: 70px;
+  background: transparent;
+  background-image: url("img/BlueBubble.gif");
+  background-size: cover;
 `;
 const Svg = styled.svg`
   width: 90%;
@@ -83,15 +86,6 @@ const BottomWrap = styled.div`
   width: 70%;
   margin-bottom: 140px;
 `;
-const Video = styled.video`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-`;
 function Welcome() {
   const navigate = useNavigate();
   const biggerboxref = useRef < HTMLDivElement > null;
@@ -112,9 +106,6 @@ function Welcome() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
     <Wrapper style={{}}>
-      <Video autoPlay loop muted>
-        <source src="bubble.mp4" type="video/mp4" />
-      </Video>
       <Svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
