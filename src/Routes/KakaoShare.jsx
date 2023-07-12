@@ -9,9 +9,7 @@ export default () =>{
 
     useEffect(()=>{
         Kakao.cleanup();
-        // 자신의 js 키를 넣어준다.
         Kakao.init('95b3e189034a38db86ef0291efef7585');
-        // 잘 적용되면 true 를 뱉는다.
         console.log(Kakao.isInitialized());
     },[]);
 
