@@ -4,7 +4,7 @@ const { Kakao } = window;
 
 export default () =>{
 	// 배포한 웹 사이트 주소 나중에 넣을 것 
-    const realUrl = "https://mm-test-maker.web.app/"
+    const realUrl = "https://tkfkdtkfkdgoyo.github.io/hiMakeum/"
     const resultUrl = "http://localhost:3000/result"
 
     useEffect(()=>{

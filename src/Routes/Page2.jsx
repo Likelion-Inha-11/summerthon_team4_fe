@@ -110,6 +110,7 @@ const Footer = styled.div`
   padding: 30px;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-image: radial-gradient(
     rgba(0, 0, 0, 0) 1px,
     rgba(255, 255, 255, 1) 1.5px
@@ -1402,7 +1403,7 @@ z"
         <img
         style={{ position: "absolute"}}
         src="img/다음 심금 깜장.png"
-        height="30rem"
+        height="60rem"
         onClick={() => {
           nextPage();
         }}
