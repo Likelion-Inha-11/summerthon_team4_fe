@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useAnimate } from "framer-motion";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import KakaoMap from "./KakaoMap";
+import KakaoShare from "./KakaoShare";
 import { useLocation, useNavigate } from "react-router-dom";
 import { testName, testResult } from "../atom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -496,8 +497,8 @@ function ShowResult() {
         >
           <p>자세히보기</p>
         </Detail>
-        <ShareDiv layoutId={2 + ""} onClick={() => setId(2)}>
-          <p>공유하기</p>
+        <ShareDiv>
+          <KakaoShare/>
         </ShareDiv>
         <OtherTest layoutId={3 + ""} onClick={() => setId(3)}>
           <p>다른 검사</p>
