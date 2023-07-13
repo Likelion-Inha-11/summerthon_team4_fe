@@ -339,7 +339,7 @@ function ShowResult() {
       ]);
     }
 
-    if (sum < 40) {
+    if (sum <= 40) {
       setStatus("양호");
       setDetailimg("img/sim1.png");
       if (testId === 1) {
@@ -383,7 +383,7 @@ function ShowResult() {
           </p>
         );
       }
-    } else if (sum < 60) {
+    } else if (sum <= 60) {
       setStatus("주의");
       setDetailimg("img/sim2.png");
       if (testId === 1) {
@@ -432,7 +432,7 @@ function ShowResult() {
           </p>
         );
       }
-    } else if (sum < 80) {
+    } else if (sum <= 80) {
       setStatus("의심");
       setDetailimg("img/sim3.png");
       if (testId === 1) {
@@ -477,7 +477,7 @@ function ShowResult() {
           </p>
         );
       }
-    } else if (sum < 100) {
+    } else if (sum <= 100) {
       setStatus("위험");
       setDetailimg("img/sim4.png");
       if (testId === 1) {
@@ -633,7 +633,7 @@ function ShowResult() {
           <p>자세히보기</p>
         </Detail>
         <ShareDiv>
-          <KakaoShare />
+          <KakaoShare totalscore={totalscore} />
         </ShareDiv>
         <OtherTest layoutId={3 + ""} onClick={() => setId(3)}>
           <p>다른 검사</p>
