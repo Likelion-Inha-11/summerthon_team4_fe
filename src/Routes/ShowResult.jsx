@@ -123,6 +123,10 @@ const MapContainer = styled(motion.div)`
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   justify-content: center;
+
+  img {
+    border-radius: 20px;
+  }
 `;
 const Overlay = styled(motion.div)`
   width: 100%;
@@ -642,7 +646,7 @@ function ShowResult() {
       <Map layoutId={4 + ""} onClick={() => setId(4)}>
         <p>인근 병원</p>
         <MapContainer>
-          <img src="img/map.png" width="100%" alt="Map" height="100%"></img>
+          <img src="img/map.jpg" width="100%" alt="Map" height="100%"></img>
         </MapContainer>
       </Map>
       <AnimatePresence>
