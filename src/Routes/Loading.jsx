@@ -17,10 +17,7 @@ const Wrapper = styled(motion.div)`
 
 function Loading() {
   const { state } = useLocation();
-  const { score7 } = state;
-  const { score8 } = state;
-  const { score9 } = state;
-  const { score10 } = state;
+  const { score7, score8, score9, score10 } = state;
 
   const navigate = useNavigate();
 

@@ -48,7 +48,7 @@ const SearchBtn = styled.button`
   right: 1rem;
   top: 1.1rem;
   color: black;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0);
   border: none;
   width: 2rem;
   height: 2rem;
@@ -56,7 +56,7 @@ const SearchBtn = styled.button`
   padding-top: 5px;
   margin-left: 7px;
 `;
-const SearchHeader = styled.div`
+const SearchHeader = styled.form`
   width: 60%;
   position: relative;
 `;
@@ -107,6 +107,14 @@ function KakaoMap() {
     };
 
     const map = new window.kakao.maps.Map(container, options);
+
+    var marker = new window.kakao.maps.Marker({
+      map,
+      position: new window.kakao.maps.LatLng(
+        37.5341203159822,
+        126.897335759076
+      ),
+    });
 
     const mapTypeControl = new window.kakao.maps.MapTypeControl();
     const zoomControl = new window.kakao.maps.ZoomControl();
@@ -164,8 +172,8 @@ function KakaoMap() {
         exit="exit"
       >
         <Box variants={BoxVariants} initial="initial" animate="end">
-          <SearchForm onSubmit={(event) => handleSearch(event)}>
-            <SearchHeader>
+          <SearchForm>
+            <SearchHeader onSubmit={(event) => handleSearch(event)}>
               <SearchBar
                 onChange={(event) => setKeyword(event.target.value)}
                 type="text"

@@ -26,6 +26,7 @@ const Wrapper = styled(motion.div)`
   scroll-snap-type: y mandatory;
 `;
 const Container = styled(motion.div)`
+  min-width: 30rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -66,22 +67,32 @@ const DragZone = styled(motion.div)`
 `;
 const ScoreGrid = styled(motion.div)`
   display: grid;
-  width: 80%;
+  width: 83%;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 1rem;
-  column-gap: 1rem;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
   margin-top: 0.8rem;
 `;
 const ScoreBox = styled(motion.div)`
   background-color: transparent;
-  border-radius: 20px;
-  /* box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1); */
   place-self: center;
+  width: 8.2rem;
+  height: 7.8rem;
+  border-radius: 20px;
+  &:nth-child(2) {
+    margin-bottom: 0.6rem;
+  }
+  &:nth-child(1) {
+    width: 7.7rem;
+  }
+  &:nth-child(3) {
+    width: 7.3rem;
+  }
+  /* box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1); */
   border: none;
 `;
 const Svg = styled(motion.svg)`
   border: none;
-  width: 9rem;
 `;
 const AskContent = styled.p`
   margin-top: 1rem;
@@ -101,6 +112,9 @@ const HeaderDiv = styled.div`
   padding: 1rem;
   height: 4rem;
   position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
   z-index: 10;
   border-bottom: 1.5px solid rgba(0, 0, 0, 1);
   background-color: rgba(255, 255, 255, 1);
@@ -224,6 +238,9 @@ function Page1({ id }) {
 
   const [isDropped, setIsDropped] = useState([]);
   const setTest = useSetRecoilState(testName);
+
+  const [dragimg, setDragimg] = useState("");
+
   useEffect(() => {
     setIsDropped([
       {
@@ -323,6 +340,16 @@ function Page1({ id }) {
 
   const DragandDrop = (x, y, itemid, num, score) => {
     const { left, width } = getRef(itemid)?.current.getBoundingClientRect();
+
+    if (num === 1) {
+      setDragimg("img/3dsim1.png");
+    } else if (num === 2) {
+      setDragimg("img/3dsim2.png");
+    } else if (num === 3) {
+      setDragimg("img/3dsim3.png");
+    } else if (num === 4) {
+      setDragimg("img/3dsim4.png");
+    }
 
     if (itemid === 1) {
       setScore1(score);
@@ -449,7 +476,7 @@ function Page1({ id }) {
         <Container
           ref={getconRef(item.id)}
           style={{
-            paddingBottom: item.id === 3 ? 150 : 0,
+            paddingBottom: item.id === 3 ? 650 : 0,
           }}
         >
           <AskDiv id={id} layoutId={item.id === 1 ? id + "" : null}>
@@ -463,15 +490,16 @@ function Page1({ id }) {
               animate="end"
               style={{
                 background: isDropped[item.id - 1]?.checked
-                ? `url(img/3D심금.png) center/cover no-repeat`
-                : "rgba(255, 255, 255, 1)",
-                backgroundSize: isDropped[item.id - 1]?.checked ? "120%" : "auto",
+                  ? `url(${dragimg}) center/cover no-repeat`
+                  : "rgba(255, 255, 255, 1)",
+
                 border: isDropped[item.id - 1]?.checked
-                ? "none"
-                : "4px dotted rgba(0,0,0,1)",
-                }}>
-                  {isDropped[item.id - 1]?.checked ? null : <p>Drag</p>}
-             </DragZone>
+                  ? "none"
+                  : "4px dotted rgba(0,0,0,1)",
+              }}
+            >
+              {isDropped[item.id - 1]?.checked ? null : <p>Drag</p>}
+            </DragZone>
           </Dragdiv>
           <ScoreGrid>
             <ScoreBox
@@ -494,7 +522,6 @@ function Page1({ id }) {
               dragSnapToOrigin={true}
             >
               <Svg
-                style={{ width: 120 }}
                 version="1.1"
                 xmlns="http://www.w3.org/2000/Svg"
                 x="0px"
@@ -637,7 +664,6 @@ z"
               dragSnapToOrigin={true}
             >
               <Svg
-                style={{ width: 125, height: 125 }}
                 version="1.1"
                 xmlns="http://www.w3.org/2000/Svg"
                 x="0px"
@@ -950,7 +976,6 @@ z"
               dragSnapToOrigin={true}
             >
               <Svg
-                style={{ marginLeft: 2, width: 115 }}
                 version="1.1"
                 xmlns="http://www.w3.org/2000/Svg"
                 x="0px"
@@ -1179,7 +1204,6 @@ z"
               dragSnapToOrigin={true}
             >
               <Svg
-                style={{ marginLeft: 5, width: 125, height: 125 }}
                 version="1.1"
                 xmlns="http://www.w3.org/2000/Svg"
                 x="0px"
