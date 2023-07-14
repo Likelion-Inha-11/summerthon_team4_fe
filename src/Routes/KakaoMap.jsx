@@ -190,7 +190,11 @@ function KakaoMap() {
       setMarkerClicked((prev) => !prev);
     });
     setPlaceInfo({ phone: "", place_name: "이레빌딩", category: "기업, 빌딩" });
-
+    setPlaceshareInfo({
+      place_name: "이레빌딩",
+      address: "서울 영등포구 선유동2로 57",
+      placeurl: "https://place.map.kakao.com/1578959890",
+    });
     const mapTypeControl = new window.kakao.maps.MapTypeControl();
     const zoomControl = new window.kakao.maps.ZoomControl();
 
@@ -256,6 +260,7 @@ function KakaoMap() {
       }
     );
     const json = await response.json();
+    console.log(json)
     console.log(json?.documents.slice(0, 6));
 
     setCenter(json?.documents?.slice(0, 6));

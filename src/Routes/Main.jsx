@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Page1 from "./Page1";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkState } from "../atom";
+import axios from "axios";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -131,7 +132,8 @@ const WrapperVariants = {
 function Main() {
   const isDark = useRecoilValue(isDarkState);
   const navigate = useNavigate();
-  const [id, setId] = useState(null);
+  const [id, setId] = useState(0);
+
   return (
     <Wrapper
       isDark={isDark}
@@ -169,7 +171,7 @@ function Main() {
           <p>ADHD</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>주의력결핍 과잉행동장애
-          </Cf>
+          </Cf>       
         </ItemBox>
         <ItemBox
           layoutId={2 + ""}

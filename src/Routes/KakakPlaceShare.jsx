@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { testName } from "../atom";
 import styled from "styled-components";
 import { LiaShareSquareSolid } from "react-icons/lia";
+import html2canvas from 'html2canvas';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const { Kakao } = window;
 
 function KakaoPlaceShare({ placename, placeurl, address }) {
   // 배포한 웹 사이트 주소 나중에 넣을 것
-  const realUrl = "https://tkfkdtkfkdgoyo.github.io/hiMakeum/";
+  const realUrl = "https://simgeum-test.pages.dev/";
   const resultUrl = "http://localhost:3000/result";
 
   useEffect(() => {
@@ -23,28 +24,30 @@ function KakaoPlaceShare({ placename, placeurl, address }) {
     Kakao.init("95b3e189034a38db86ef0291efef7585");
     console.log(Kakao.isInitialized());
   }, []);
-
+  const placeId = placeurl.split('/').pop()
   const shareKakao = () => {
-    Kakao.Share.sendDefault({
-      objectType: "feed",
-      content: {
-        title: placename,
-        description: address,
+  const shareData = {
+    objectType: "feed",
+    content: {
+      imageUrl: `https://hello-world-weathered-boat-a268.pssfrdvhx5.workers.dev/?id=${placeId}`,
+      title: placename,
+      description: address,
+      link: {
+        mobileWebUrl: realUrl,
+      },
+    },
+    buttons: [
+      {
+        title: "자세히 보기",
         link: {
-          mobileWebUrl: realUrl,
+          mobileWebUrl: placeurl,
         },
       },
-      buttons: [
-        {
-          title: "자세히 보기",
-          link: {
-            mobileWebUrl: realUrl,
-          },
-        },
-      ],
-    });
+    ],
+  }
+  console.log(shareData)
+    Kakao.Share.sendDefault(shareData);
   };
-
   return (
     <Container
       onClick={() => {
