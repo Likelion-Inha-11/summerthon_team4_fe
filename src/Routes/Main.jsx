@@ -171,7 +171,7 @@ function Main() {
           <p>ADHD</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>주의력결핍 과잉행동장애
-          </Cf>       
+          </Cf>
         </ItemBox>
         <ItemBox
           layoutId={2 + ""}

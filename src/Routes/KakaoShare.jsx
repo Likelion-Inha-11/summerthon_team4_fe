@@ -42,7 +42,7 @@ function KakaoShare({ totalscore }) {
 
   useEffect(() => {
     Kakao.cleanup();
-    Kakao.init("95b3e189034a38db86ef0291efef7585");
+    Kakao.init("10e2c939c093277cef801d187d6fe6e9");
     console.log(Kakao.isInitialized());
   }, []);
 

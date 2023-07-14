@@ -358,6 +358,11 @@ export const toDoText = atom({
         "홍심금 심금이의 평소 표정, 우울하지도 않고 그냥 지내고 있다. 하지만, 재밌는 일이 일어나기를 원하고 있다. ",
     },
     {
+      title: "흑흑 심금",
+      content:
+        "흑흑 심금 심금이에게 무슨 일이 일어난 걸까? 조금 불안해보이기도 하고, 안정적이지 못해 보인다. 우울한 심금이의 입꼬리, 올려주고 싶지 않은가? ",
+    },
+    {
       title: "빠직 심금",
       content:
         "빠직 심금 자기의 화를 조절하지 못하는 심금이의 표정이다. 무슨 일이 일어났는지 모르겠지만 단단히 화가 나 보인다.",
@@ -367,15 +372,15 @@ export const toDoText = atom({
       content:
         "헤롱 심금 친구들과 재밌게 놀고 얼큰하게 취한 심금이의 얼굴이다. 심금이의 눈만 보아도 정말이지 끝내주는 술자리를 가진 것 같다. ",
     },
-    {
-      title: "흑흑 심금",
-      content:
-        "흑흑 심금 심금이에게 무슨 일이 일어난 걸까? 조금 불안해보이기도 하고, 안정적이지 못해 보인다. 우울한 심금이의 입꼬리, 올려주고 싶지 않은가? ",
-    },
   ],
 });
 
 export const isDarkState = atom({
   key: "isDark",
+  default: false,
+});
+
+export const isBoardClicked = atom({
+  key: "isBoardClicked",
   default: false,
 });

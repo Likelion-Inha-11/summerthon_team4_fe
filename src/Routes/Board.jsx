@@ -1,28 +1,21 @@
 import { Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import DragabbleCard from "./DragabbleCard";
-import { useState } from "react";
 
 const Wrapper = styled.div`
-  width: ${(props) => (props.id ? "40%" : "80%")};
-  padding-top: 10px;
+  width: ${(props) => (props.id ? "40%" : "100%")};
   background-color: #d7d2cc;
   border-radius: 20px;
   flex-direction: column;
   max-width: 768px;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
-
 const Title = styled.h2`
   font-family: "Open Sans", sans-serif;
   text-align: center;
   font-weight: 600;
-  margin-bottom: 10px;
+  padding-top: 1rem;
   font-size: 25px;
 `;
-
 const Area = styled.div`
   background-color: ${(props) =>
     props.isDraggingOver
@@ -46,6 +39,7 @@ function Board({ toDos, boardId }) {
       return false;
     }
   };
+
   return (
     <Wrapper id={getBoard()}>
       <Title>{boardId}</Title>

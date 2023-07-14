@@ -4,7 +4,6 @@ import { useRecoilValue } from "recoil";
 import { testName } from "../atom";
 import styled from "styled-components";
 import { LiaShareSquareSolid } from "react-icons/lia";
-import html2canvas from 'html2canvas';
 
 const Container = styled.div`
   display: flex;
@@ -21,31 +20,33 @@ function KakaoPlaceShare({ placename, placeurl, address }) {
 
   useEffect(() => {
     Kakao.cleanup();
-    Kakao.init("95b3e189034a38db86ef0291efef7585");
+    Kakao.init("10e2c939c093277cef801d187d6fe6e9");
     console.log(Kakao.isInitialized());
   }, []);
-  const placeId = placeurl.split('/').pop()
+  const placeId = placeurl.split("/").pop();
   const shareKakao = () => {
-  const shareData = {
-    objectType: "feed",
-    content: {
-      imageUrl: `https://hello-world-weathered-boat-a268.pssfrdvhx5.workers.dev/?id=${placeId}`,
-      title: placename,
-      description: address,
-      link: {
-        mobileWebUrl: realUrl,
-      },
-    },
-    buttons: [
-      {
-        title: "자세히 보기",
+    const shareData = {
+      objectType: "feed",
+      content: {
+        imageUrl: `https://hello-world-weathered-boat-a268.pssfrdvhx5.workers.dev/?id=${placeId}`,
+        title: placename,
+        description: address,
         link: {
           mobileWebUrl: placeurl,
+          webUrl: placeurl,
         },
       },
-    ],
-  }
-  console.log(shareData)
+      buttons: [
+        {
+          title: "자세히 보기",
+          link: {
+            mobileWebUrl: placeurl,
+            webUrl: placeurl,
+          },
+        },
+      ],
+    };
+    console.log(shareData);
     Kakao.Share.sendDefault(shareData);
   };
   return (

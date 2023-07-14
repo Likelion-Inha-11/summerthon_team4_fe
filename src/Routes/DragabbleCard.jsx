@@ -13,7 +13,7 @@ const Card = styled(motion.div)`
   background-color: ${(props) => (props.isDragging ? "tomato" : "white")};
   display: flex;
   justify-content: center;
-  width: ${(props) => (props.id ? "55%" : "100%")};
+  width: ${(props) => (props.id ? "70%" : "100%")};
 `;
 
 const SimgeumCard = styled.div`

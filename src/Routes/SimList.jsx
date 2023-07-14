@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   DragDropContext,
   Droppable,
@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { isDarkState, toDoState } from "../atom";
 import Board from "./Board";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled(motion.div)`
   width: 768px;
@@ -17,18 +18,22 @@ const Wrapper = styled(motion.div)`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 150vh;
   background-color: #faf9fe;
+  position: relative;
   @media (max-width: 768px) {
     width: 100%;
   }
+  overflow: scroll;
 `;
 const Boards = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  justify-content: space-evenly;
   width: 100%;
+  height: 100vh;
+  padding-bottom: 5rem;
 `;
 const WrapperVariants = {
   initial: { x: 500, opacity: 0 },
@@ -44,10 +49,21 @@ const WrapperVariants = {
     opacity: 0,
   },
 };
+const BackBtn = styled.div`
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  font-size: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 function SimList() {
   const isDark = useRecoilValue(isDarkState);
   const [toDos, setToDos] = useRecoilState(toDoState);
+
+  const navigate = useNavigate();
   const onDragEnd = (info) => {
     const { draggableId, destination, source } = info;
     console.log(info);
@@ -89,6 +105,9 @@ function SimList() {
           exit="exit"
           isDark={isDark}
         >
+          <BackBtn onClick={() => navigate("/result")}>
+            <i style={{ marginRight: 10 }} class="fa-solid fa-arrow-left"></i>
+          </BackBtn>
           <Boards>
             {Object.keys(toDos).map((boardId) => (
               <Board boardId={boardId} key={boardId} toDos={toDos[boardId]} />

@@ -25,7 +25,7 @@ const Wrapper = styled(motion.div)`
   }
 `;
 const Svg = styled.svg`
-  width: 105%;
+  width: 100%;
   margin-left: 0.7rem;
   path {
     stroke: gold;
@@ -44,9 +44,9 @@ const svg = {
 };
 const TestBtn = styled.button`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  width: 80%;
+  width: 95%;
   background-color: #ffc900;
-  height: 3rem;
+  height: 4rem;
   border: none;
   border-radius: 30px;
   font-size: 1.5rem;
@@ -55,32 +55,6 @@ const TestBtn = styled.button`
   &:hover {
     cursor: pointer;
     transform: scale(1.08);
-  }
-`;
-const KakaoBtn = styled.div`
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  color: #5a94f5;
-  font-size: 1rem;
-  margin-top: 10px;
-  transition: all 0.15s ease-in-out;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-  }
-  img {
-    width: 2.5rem;
-    height: 80%;
-  }
-  p {
-    font-weight: 600;
-    margin-left: 1rem;
   }
 `;
 const BottomWrap = styled.div`
@@ -258,10 +232,6 @@ z"
       </Svg>
       <BottomWrap>
         <TestBtn onClick={() => navigate("/test")}>Test</TestBtn>
-        <KakaoBtn onClick={() => navigate("/login")}>
-          <img alt="#" src="img/KakaoLogo.png" />
-          <p>Login in with Kakao</p>
-        </KakaoBtn>
       </BottomWrap>
     </Wrapper>
   );

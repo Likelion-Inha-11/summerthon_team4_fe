@@ -260,7 +260,6 @@ const ShowLogo = styled.div`
   align-items: center;
   position: relative;
   height: 3.7rem;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   p {
     font-family: "Noto Sans KR", sans-serif;
@@ -587,11 +586,11 @@ function ShowResult() {
                 show: false,
               },
             },
-            colors: ["#BA5370"],
+            colors: ["rgba(186, 83, 112, 0.8)"],
             fill: {
               type: "gradient",
               gradient: {
-                gradientToColors: ["#F4E2D8"],
+                gradientToColors: ["rgba(244, 226, 216, 0.8)"],
                 stops: [0, 100],
               },
             },
@@ -653,7 +652,8 @@ function ShowResult() {
           <p>자세히보기</p>
         </Detail>
         <ShowLogo onClick={() => navigate("/simlist")}>
-          <p>심금 스토어</p>
+          <p>심금 STORE</p>
+          <ClickDiv></ClickDiv>
         </ShowLogo>
         <ShareDiv>
           <KakaoShare totalscore={totalscore} />

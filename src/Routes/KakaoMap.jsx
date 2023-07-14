@@ -129,20 +129,20 @@ const PlaceCategory = styled.p`
   opacity: 0.8;
 `;
 const InfoBox = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  margin-left: 3rem;
+  margin-left: 2rem;
   margin-bottom: 1rem;
 `;
 const ImgBox = styled.div`
   display: flex;
   width: 20%;
   font-size: 2rem;
-  margin-right: 2rem;
+  margin-right: 3rem;
 `;
 const ShareBox = styled.div`
   width: 2rem;
@@ -260,7 +260,7 @@ function KakaoMap() {
       }
     );
     const json = await response.json();
-    console.log(json)
+    console.log(json);
     console.log(json?.documents.slice(0, 6));
 
     setCenter(json?.documents?.slice(0, 6));
@@ -311,13 +311,12 @@ function KakaoMap() {
                 </InfoBox>
                 <ImgBox>
                   <a
-                    href={"tel:+1" + placeInfo?.phone}
+                    href={"tel:+82" + placeInfo?.phone}
                     style={{ color: "black" }}
                   >
                     <AiFillPhone style={{ marginRight: 20 }} />
                   </a>
                   <ShareBox>
-                    
                     <KakaoPlaceShare
                       placename={placeshareInfo?.place_name}
                       placeurl={placeshareInfo?.placeurl}
