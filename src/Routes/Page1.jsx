@@ -9,12 +9,8 @@ import {
   useTransform,
 } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValueLoadable,
-  useSetRecoilState,
-} from "recoil";
-import { testObj, testResult, testName } from "../atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { testObj, testResult, testName, isDarkState } from "../atom";
 
 const Wrapper = styled(motion.div)`
   background-color: rgba(255, 255, 255, 1);
@@ -44,7 +40,7 @@ const AskDiv = styled(motion.div)`
   background: url("img/bg${(props) => props.id}.png");
   background-size: 100% 100%;
   flex-shrink: 0;
-  width: 100%;
+  width: 90%;
   height: 10rem;
   display: flex;
   justify-content: center;
@@ -144,10 +140,13 @@ const Footer = styled.div`
   -webkit-backdrop-filter: blur(1px);
 `;
 const ScoreBoxVariants = {
-  hover: { rotateZ: 180, transition: { duration: 0.3 } },
+  hover: {
+    rotateZ: -20,
+    transition: { duration: 0.3, type: "spring", damping: 2 },
+  },
   tap: {
-    rotateZ: -180,
-    transition: { duration: 0.3 },
+    rotateZ: 20,
+    transition: { duration: 0.2, type: "spring", damping: 2 },
   },
   initial: {
     opacity: 0,
@@ -381,7 +380,9 @@ function Page1({ id }) {
             return obj;
           })
         );
-        onContent2Click();
+        setTimeout(() => {
+          onContent2Click();
+        }, 1000);
       }
     } else if (itemid === 2) {
       console.log(left, width);
@@ -406,7 +407,9 @@ function Page1({ id }) {
             return obj;
           })
         );
-        onContent3Click();
+        setTimeout(() => {
+          onContent3Click();
+        }, 1000);
       }
     } else if (itemid === 3) {
       console.log(left, width);

@@ -323,3 +323,59 @@ export const testName = atom({
   key: "testName",
   default: 0,
 });
+
+export const toDoState = atom({
+  key: "toDo",
+  default: {
+    심금이들: [
+      "img/3dsim1.png",
+      "img/3dsim2.png",
+      "img/3dsim3.png",
+      "img/3dsim4.png",
+      "img/3dsim5.png",
+      "img/3dsim6.png",
+    ],
+    "Who is This": [],
+  },
+});
+
+export const toDoText = atom({
+  key: "toDoText",
+  default: [
+    {
+      title: "만개 심금",
+      content:
+        "몸도 마음도 건강한 심금이의 표정이다. 운동하는 걸 좋아하고, 일찍 일어나서 산책하는 걸 취미로 한다.",
+    },
+    {
+      title: "미소 심금",
+      content:
+        "일상 생활을 안정적으로 유지하는 심금이의 미소, 방방 뛰진 않아도 심금이는 무척 행복한 상태이다",
+    },
+    {
+      title: "홍심금",
+      content:
+        "홍심금 심금이의 평소 표정, 우울하지도 않고 그냥 지내고 있다. 하지만, 재밌는 일이 일어나기를 원하고 있다. ",
+    },
+    {
+      title: "빠직 심금",
+      content:
+        "빠직 심금 자기의 화를 조절하지 못하는 심금이의 표정이다. 무슨 일이 일어났는지 모르겠지만 단단히 화가 나 보인다.",
+    },
+    {
+      title: "헤롱 심금",
+      content:
+        "헤롱 심금 친구들과 재밌게 놀고 얼큰하게 취한 심금이의 얼굴이다. 심금이의 눈만 보아도 정말이지 끝내주는 술자리를 가진 것 같다. ",
+    },
+    {
+      title: "흑흑 심금",
+      content:
+        "흑흑 심금 심금이에게 무슨 일이 일어난 걸까? 조금 불안해보이기도 하고, 안정적이지 못해 보인다. 우울한 심금이의 입꼬리, 올려주고 싶지 않은가? ",
+    },
+  ],
+});
+
+export const isDarkState = atom({
+  key: "isDark",
+  default: false,
+});

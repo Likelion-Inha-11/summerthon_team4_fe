@@ -2,12 +2,8 @@ import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useSetRecoilState,
-  useRecoilValueLoadable,
-} from "recoil";
-import { testObj, testResult } from "../atom";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+import { testObj, testResult, isDarkState } from "../atom";
 
 const Wrapper = styled(motion.div)`
   background-color: rgba(255, 255, 255, 1);
@@ -37,7 +33,7 @@ const AskDiv = styled(motion.div)`
   background: url("img/bg${(props) => props.id}.png");
   background-size: 100% 100%;
   flex-shrink: 0;
-  width: 100%;
+  width: 90%;
   height: 10rem;
   display: flex;
   justify-content: center;
@@ -135,8 +131,14 @@ const Footer = styled.div`
   -webkit-backdrop-filter: blur(1px);
 `;
 const ScoreBoxVariants = {
-  hover: { rotateZ: 180, transition: { duration: 0.3 } },
-  tap: { rotateZ: -180, transition: { duration: 0.3 } },
+  hover: {
+    rotateZ: -20,
+    transition: { duration: 0.3, type: "spring", damping: 2 },
+  },
+  tap: {
+    rotateZ: 20,
+    transition: { duration: 0.2, type: "spring", damping: 2 },
+  },
   initial: {
     opacity: 0,
   },
@@ -160,7 +162,11 @@ const DragZoneVariants = {
 };
 const WrapperVariants = {
   load: { opacity: 0, x: 500 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5 },
+  },
   exit: { opacity: 0, x: -500 },
 };
 const Svg = styled(motion.svg)`
@@ -429,7 +435,9 @@ function Page2() {
             return obj;
           })
         );
-        onContent2Click();
+        setTimeout(() => {
+          onContent2Click();
+        }, 1000);
       }
     } else if (itemid === 5) {
       console.log(left, width);
@@ -454,7 +462,9 @@ function Page2() {
             return obj;
           })
         );
-        onContent3Click();
+        setTimeout(() => {
+          onContent3Click();
+        }, 1000);
       }
     } else if (itemid === 6) {
       console.log(left, width);

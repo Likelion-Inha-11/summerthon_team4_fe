@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Page1 from "./Page1";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkState } from "../atom";
 
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -40,7 +41,6 @@ const ItemBox = styled(motion.div)`
   div {
     width: 100%;
     height: 60%;
-    background: ${(props) => props.bgcolor};
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
   }
@@ -127,13 +127,18 @@ const WrapperVariants = {
   show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
   exit: { opacity: 0, x: -500 },
 };
-const ColorVariants = {};
 
 function Main() {
+  const isDark = useRecoilValue(isDarkState);
   const navigate = useNavigate();
   const [id, setId] = useState(null);
   return (
-    <Wrapper variants={WrapperVariants} initial="load" animate="show">
+    <Wrapper
+      isDark={isDark}
+      variants={WrapperVariants}
+      initial="load"
+      animate="show"
+    >
       <TestList variants={TestListVariants} initial="start" animate="end">
         Test List
       </TestList>
@@ -147,11 +152,20 @@ function Main() {
           initial="start"
           animate="end"
           whileHover="hover"
-          bgcolor={
-            "linear-gradient(135deg, rgba(255,203,160), rgba(221,87,137), rgba(155,91,230));"
-          }
         >
-          <div></div>
+          <motion.div
+            animate={{
+              background: [
+                "linear-gradient(135deg, rgba(255,203,160), rgba(221,87,137), rgba(155,91,230))",
+                "linear-gradient(135deg, rgba(155,91,230), rgba(221,87,137), rgba(255,203,160))",
+                "linear-gradient(135deg, rgba(255,203,160), rgba(221,87,137), rgba(155,91,230))",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          ></motion.div>
           <p>ADHD</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>주의력결핍 과잉행동장애
@@ -166,11 +180,20 @@ function Main() {
           initial="start"
           animate="end"
           whileHover="hover"
-          bgcolor={
-            "linear-gradient(135deg, rgba(255,95,109), rgba(255,195,113));"
-          }
         >
-          <div></div>
+          <motion.div
+            animate={{
+              background: [
+                "linear-gradient(135deg, rgba(255,195,113), rgba(255,95,109))",
+                "linear-gradient(135deg, rgba(255,95,109), rgba(255,195,113))",
+                "linear-gradient(135deg, rgba(255,195,113), rgba(255,95,109))",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          ></motion.div>
           <p>IED</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>분노조절장애
@@ -185,11 +208,20 @@ function Main() {
           initial="start"
           animate="end"
           whileHover="hover"
-          bgcolor={
-            "linear-gradient(135deg, rgba(161, 255, 139), rgba(63, 147, 255));"
-          }
         >
-          <div></div>
+          <motion.div
+            animate={{
+              background: [
+                "linear-gradient(135deg, rgba(161, 255, 139), rgba(63, 147, 255))",
+                "linear-gradient(135deg, rgba(63, 147, 255), rgba(161, 255, 139))",
+                "linear-gradient(135deg, rgba(161, 255, 139), rgba(63, 147, 255))",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          ></motion.div>
           <p>Alcoholism</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>알코올 중독
@@ -204,11 +236,20 @@ function Main() {
           initial="start"
           animate="end"
           whileHover="hover"
-          bgcolor={
-            "linear-gradient(135deg, rgba(213, 218, 240), rgba(121, 160, 231), rgba(41, 110, 223));"
-          }
         >
-          <div></div>
+          <motion.div
+            animate={{
+              background: [
+                "linear-gradient(135deg, rgba(213, 218, 240), rgba(121, 160, 231), rgba(41, 110, 223))",
+                "linear-gradient(135deg, rgba(41, 110, 223), rgba(121, 160, 231), rgba(213, 218, 240))",
+                "linear-gradient(135deg, rgba(213, 218, 240), rgba(121, 160, 231), rgba(41, 110, 223))",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          ></motion.div>
           <p>Depression</p>
           <Cf>
             <i class="fa-solid fa-square-check"></i>우울증

@@ -7,6 +7,7 @@ import Page3 from "./Routes/Page3";
 import KakaoMap from "./Routes/KakaoMap";
 import Loading from "./Routes/Loading";
 import Layout from "./Components/Layout";
+import SimList from "./Routes/SimList";
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
           <Route path="/page3" element={<Page3 />}></Route>
           <Route path="/load" element={<Loading />}></Route>
           <Route path="/map" element={<KakaoMap />}></Route>
+          <Route path="/simlist" element={<SimList />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

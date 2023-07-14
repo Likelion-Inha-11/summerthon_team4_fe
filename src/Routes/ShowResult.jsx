@@ -7,6 +7,7 @@ import KakaoShare from "./KakaoShare";
 import { useLocation, useNavigate } from "react-router-dom";
 import { testName, testResult } from "../atom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import SimList from "./SimList";
 
 const Wrapper = styled(motion.div)`
   width: 768px;
@@ -40,9 +41,6 @@ const Chart = styled(motion.div)`
 const MidDiv = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  div:first-child {
-    grid-column: span 2;
-  }
   width: 90%;
   column-gap: 0.5rem;
   row-gap: 0.5rem;
@@ -250,6 +248,24 @@ const ClickDiv = styled.div`
   z-index: 10;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+const ShowLogo = styled.div`
+  width: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 3.7rem;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  p {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 15px;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -636,6 +652,9 @@ function ShowResult() {
           <ClickDiv></ClickDiv>
           <p>자세히보기</p>
         </Detail>
+        <ShowLogo onClick={() => navigate("/simlist")}>
+          <p>심금 스토어</p>
+        </ShowLogo>
         <ShareDiv>
           <KakaoShare totalscore={totalscore} />
         </ShareDiv>

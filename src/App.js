@@ -1,6 +1,6 @@
 import Router from "./Router";
 import GlobalStyle from "./Global";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
